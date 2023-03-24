@@ -15,7 +15,7 @@
 		<ApplicationTitle>ProjectNasa</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.projectnasa</ApplicationId>
+		<ApplicationId>be.frietstoofvlees.projectnasa</ApplicationId>
 		<ApplicationIdGuid>0d4efe4e-412a-4181-88ba-09da50db839b</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -49,7 +49,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="View\ApodPage.xaml.cs">
+	    <DependentUpon>ApodPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

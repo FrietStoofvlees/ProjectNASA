@@ -19,6 +19,12 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-		return builder.Build();
+		builder.Services.AddSingleton<IApodService, ApodService>();
+        builder.Services.AddSingleton<ApodViewModel>();
+        builder.Services.AddSingleton<ApodPage>();
+
+        builder.Services.AddSingleton(Connectivity.Current);
+
+        return builder.Build();
 	}
 }
