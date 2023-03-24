@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectNasa.View.ApodPage"
+             xmlns:model="clr-namespace:ProjectNasa.Model"
+             xmlns:viewmodel="clr-namespace:ProjectNasa.ViewModel"
+             x:DataType="viewmodel:ApodViewModel"
+             Title="{Binding Title}">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="10"
+            Padding="10">
+            <Label
+                x:Name="lblTitle"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                SemanticProperties.Description="Title of the picture"
+                Text="{Binding Apod.Title}"/>
+
+            <Image
+                Aspect="AspectFill"
+                Source="{Binding Apod.Url}"
+                SemanticProperties.Description="A cool astronomy picture!"
+                HorizontalOptions="Center"/>
+
+            <Label 
+                x:Name="lblExplanation"
+                SemanticProperties.Description="Explanation of the picture."
+                Text="{Binding Apod.Explanation}"/>
+
+            <Grid ColumnDefinitions="*,*" RowDefinitions="*">
+                <Label 
+                    x:Name="lblDate"
+                    Grid.Column="0"
+                    SemanticProperties.Description="Date of the picture of the day"
+                    Text="{Binding Apod.Date}"
+                    HorizontalOptions="Start"/>
+
+                <Label 
+                    x:Name="lblCopyright"
+                    Grid.Column="1"
+                    SemanticProperties.Description="Copyright"
+                    Text="{Binding Apod.Copyright}"
+                    HorizontalOptions="End"/>
+            </Grid>
+
+            <Button
+                x:Name="btnGetApod"
+                Text="Ready to discover the universe?"
+                Command="{Binding GetApodCommand}"
+                SemanticProperties.Hint="Gets the Astronomical Picture Of the Day."
+                HorizontalOptions="Center" 
+                IsVisible="{Binding IsNotSet}"/>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
