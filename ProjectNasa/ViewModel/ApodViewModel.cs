@@ -26,6 +26,8 @@ namespace ProjectNasa.ViewModel
 
             Title = "Astronomy Picture of the Day!";
             IsNotSet = true;
+
+            Task.Run(GetApodAsync);
         }
 
         [RelayCommand]
@@ -42,18 +44,11 @@ namespace ProjectNasa.ViewModel
                 if (Apod != null)
                 {
                     if (Apod.Date < DateOnly.FromDateTime(DateTime.Now))
-                    {
                         Apod = await apodService.GetAstronomyPictureoftheDayAsync();
-                    }
-                    else
-                    {
-                        return;
-                    }
+                    else return;
                 }
                 else
-                {
                     Apod = await apodService.GetAstronomyPictureoftheDayAsync();
-                }
 
                 IsNotSet = false;
             }

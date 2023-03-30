@@ -47,9 +47,9 @@
 
             <Button
                 x:Name="btnGetApod"
-                Text="Ready to discover the universe?"
+                Text="Update me!"
                 Command="{Binding GetApodCommand}"
-                SemanticProperties.Hint="Gets the Astronomical Picture Of the Day."
+                SemanticProperties.Hint="Gets the Astronomical Picture of the Day."
                 HorizontalOptions="Center" 
                 IsVisible="{Binding IsNotSet}"/>
             
