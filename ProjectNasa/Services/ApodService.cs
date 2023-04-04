@@ -20,7 +20,7 @@ namespace ProjectNasa.Services
 
         public async Task<Apod> GetAstronomyPictureoftheDayAsync()
         {
-            HttpResponseMessage response = await httpClient.GetAsync("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY");
+            HttpResponseMessage response = await httpClient.GetAsync("https://api.nasa.gov/planetary/apod?api_key=***REMOVED***");
 
             if (response.IsSuccessStatusCode)
             {
