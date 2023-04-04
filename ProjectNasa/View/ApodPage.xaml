@@ -7,52 +7,60 @@
              x:DataType="viewmodel:ApodViewModel"
              Title="{Binding Title}">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="10"
-            Padding="10">
-            <Label
-                x:Name="lblTitle"
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
-                SemanticProperties.Description="Title of the picture"
-                Text="{Binding Apod.Title}"/>
 
-            <Image
-                Aspect="AspectFill"
-                Source="{Binding Apod.Url}"
-                SemanticProperties.Description="A cool astronomy picture!"
-                HorizontalOptions="Center"/>
-
-            <Label 
-                x:Name="lblExplanation"
-                SemanticProperties.Description="Explanation of the picture."
-                Text="{Binding Apod.Explanation}"/>
-
-            <Grid ColumnDefinitions="*,*" RowDefinitions="*">
-                <Label 
-                    x:Name="lblDate"
-                    Grid.Column="0"
-                    SemanticProperties.Description="Date of the picture of the day"
-                    Text="{Binding Apod.Date}"
-                    HorizontalOptions="Start"/>
-
-                <Label 
-                    x:Name="lblCopyright"
-                    Grid.Column="1"
-                    SemanticProperties.Description="Copyright"
-                    Text="{Binding Apod.Copyright}"
-                    HorizontalOptions="End"/>
-            </Grid>
-
-            <Button
-                x:Name="btnGetApod"
-                Text="Update me!"
-                Command="{Binding GetApodCommand}"
-                SemanticProperties.Hint="Gets the Astronomical Picture of the Day."
-                HorizontalOptions="Center" 
-                IsVisible="{Binding IsNotSet}"/>
+    <Grid>
+        <RefreshView
+            Command="{Binding GetApodCommand}"
+            IsRefreshing="{Binding IsRefreshing}">
             
-        </VerticalStackLayout>
-    </ScrollView>
+            <ScrollView>
+                <VerticalStackLayout
+                    Spacing="10"
+                    Padding="10">
+                    <Label
+                        x:Name="lblTitle"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        SemanticProperties.Description="Title of the picture"
+                        Text="{Binding Apod.Title}"/>
+
+                    <Image
+                        Aspect="AspectFill"
+                        Source="{Binding Apod.Url}"
+                        SemanticProperties.Description="A cool astronomy picture!"
+                        HorizontalOptions="Center"/>
+
+                    <Label 
+                        x:Name="lblExplanation"
+                        SemanticProperties.Description="Explanation of the picture."
+                        Text="{Binding Apod.Explanation}"/>
+
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="*">
+                        <Label 
+                            x:Name="lblDate"
+                            Grid.Column="0"
+                            SemanticProperties.Description="Date of the picture of the day"
+                            Text="{Binding Apod.Date}"
+                            HorizontalOptions="Start"/>
+
+                        <Label 
+                            x:Name="lblCopyright"
+                            Grid.Column="1"
+                            SemanticProperties.Description="Copyright"
+                            Text="{Binding Apod.Copyright}"
+                            HorizontalOptions="End"/>
+                    </Grid>
+
+                </VerticalStackLayout>
+            </ScrollView>
+        </RefreshView>
+
+        <ActivityIndicator
+            IsVisible="{Binding IsBusy}"
+            IsRunning="{Binding IsBusy}"
+            SemanticProperties.Description="Loading Astronomical Picture of the Day"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+       
+    </Grid>
 </ContentPage>

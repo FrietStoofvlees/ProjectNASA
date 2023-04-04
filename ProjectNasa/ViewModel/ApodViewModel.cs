@@ -17,7 +17,7 @@ namespace ProjectNasa.ViewModel
         Apod apod;
 
         [ObservableProperty]
-        bool isNotSet;
+        bool isRefreshing;
 
         public ApodViewModel(IApodService apodService, IConnectivity connectivity)
         {
@@ -25,7 +25,6 @@ namespace ProjectNasa.ViewModel
             this.connectivity = connectivity;
 
             Title = "Astronomy Picture of the Day!";
-            IsNotSet = true;
 
             Task.Run(GetApodAsync);
         }
@@ -35,11 +34,15 @@ namespace ProjectNasa.ViewModel
         {
             try
             {
+                if (IsBusy) return;
+
                 if (connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
                     await Shell.Current.DisplayAlert("No connectivity!", "Check your internet connection", "OK");
                     return;
                 }
+
+                IsBusy = true;
 
                 if (Apod != null)
                 {
@@ -49,12 +52,15 @@ namespace ProjectNasa.ViewModel
                 }
                 else
                     Apod = await apodService.GetAstronomyPictureoftheDayAsync();
-
-                IsNotSet = false;
             }
             catch (Exception ex)
             {
                 await Shell.Current.DisplayAlert("The following error occured:", ex.Message, "OK");
+            }
+            finally 
+            {
+                IsBusy = false;
+                IsRefreshing = false;
             }
         }
     }
