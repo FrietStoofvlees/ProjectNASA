@@ -6,5 +6,6 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
         Routing.RegisterRoute(nameof(ApodPage), typeof(ApodPage));
+		Routing.RegisterRoute(nameof(ImagePage), typeof(ImagePage));
     }
 }

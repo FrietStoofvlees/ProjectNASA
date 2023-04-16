@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.HotReload;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace ProjectNasa.ViewModel
 {
     public partial class ApodViewModel : BaseViewModel
     {
-        IApodService apodService;
-        IConnectivity connectivity;
+        readonly IApodService apodService;
+        readonly IConnectivity connectivity;
 
         [ObservableProperty]
         Apod apod;
@@ -62,6 +63,20 @@ namespace ProjectNasa.ViewModel
                 IsBusy = false;
                 IsRefreshing = false;
             }
+        }
+
+        [RelayCommand]
+        async Task OnImageTappedAsync(Apod apod)
+        {
+            if (apod == null)
+                return;
+
+            await Shell.Current.GoToAsync(nameof(ImagePage), true, new Dictionary<string, object>
+            {
+                {"Apod", apod},
+            });
+
+            SemanticScreenReader.Announce("Picture in High Definition:" + apod.Title);  
         }
     }
 }

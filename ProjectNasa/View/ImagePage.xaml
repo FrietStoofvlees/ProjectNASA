@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectNasa.View.ImagePage"
+             xmlns:model="clr-namespace:ProjectNasa.Model"
+             xmlns:viewmodel="clr-namespace:ProjectNasa.ViewModel"
+             x:DataType="viewmodel:ImageViewModel"
+             Title="{Binding Apod.Title}"
+             Shell.NavBarIsVisible="False">
+    <ScrollView>
+
+        <Grid
+            RowDefinitions="*, 100">
+            <VerticalStackLayout
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Grid.Row="0">
+
+                <Image 
+                    x:Name="imgHDApod"
+                    Source="{Binding Apod.Hdurl}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"/>
+            </VerticalStackLayout>
+
+            <Button
+                x:Name="btnDownload"
+                BackgroundColor="Black"
+                BorderWidth="2"
+                BorderColor="White"
+                Command="{Binding DownloadImageCommand}"
+                CornerRadius="20"
+                SemanticProperties.Hint="Navigates you to the Astronomy Picture of the Day."
+                Text="Download"
+                TextColor="White"
+                Margin="10"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                Grid.Row="1"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>
