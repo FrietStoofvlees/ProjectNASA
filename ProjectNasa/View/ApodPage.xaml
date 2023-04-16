@@ -13,7 +13,9 @@
             Command="{Binding GetApodCommand}"
             IsRefreshing="{Binding IsRefreshing}">
             
-            <ScrollView>
+            <ScrollView
+                HorizontalScrollBarVisibility="Never"
+                VerticalScrollBarVisibility="Never">
                 <VerticalStackLayout
                     Spacing="10"
                     Padding="10">
@@ -25,10 +27,19 @@
                         Text="{Binding Apod.Title}"/>
 
                     <Image
+                        x:Name="imgApod"
                         Aspect="AspectFill"
                         Source="{Binding Apod.Url}"
                         SemanticProperties.Description="A cool astronomy picture!"
-                        HorizontalOptions="Center"/>
+                        HorizontalOptions="Center">
+
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ApodViewModel}}, Path=ImageTappedCommand}"
+                                CommandParameter="{Binding Apod}"/>
+                        </Image.GestureRecognizers>
+                        
+                    </Image>
 
                     <Label 
                         x:Name="lblExplanation"

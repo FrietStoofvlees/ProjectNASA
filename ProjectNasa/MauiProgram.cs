@@ -23,6 +23,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<ApodViewModel>();
         builder.Services.AddSingleton<ApodPage>();
 
+        builder.Services.AddTransient<ImageViewModel>();
+		builder.Services.AddTransient<ImagePage>();
+
         builder.Services.AddSingleton(Connectivity.Current);
 
         return builder.Build();
