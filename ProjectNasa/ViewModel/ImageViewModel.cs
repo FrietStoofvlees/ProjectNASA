@@ -1,38 +1,46 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Storage;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics.Platform;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using IImage = Microsoft.Maui.Graphics.IImage;
 
 namespace ProjectNasa.ViewModel
 {
     [QueryProperty(nameof(Apod), "Apod")]
     public partial class ImageViewModel : BaseViewModel
     {
+        readonly IFileSaver fileSaver;
+        CancellationTokenSource cancellationTokenSource = new();
+
         [ObservableProperty]
         Apod apod;
 
-        [RelayCommand]
-        void DownloadImage() 
+        public ImageViewModel(IFileSaver fileSaver)
         {
-            //IImage image;
+            this.fileSaver = fileSaver;
+        }
 
-            //Assembly assembly = GetType().GetTypeInfo().Assembly;
+        [RelayCommand]
+        async void SavePicture() 
+        {
+            try
+            {
+                byte[] imageArray;
 
-            //using Stream stream = assembly.GetManifestResourceStream(Apod.Hdurl);
-            //image = PlatformImage.FromStream(stream);
+                using (HttpClient client = new())
+                {
+                    imageArray = await client.GetByteArrayAsync(Apod.Hdurl);
+                }
 
-            //if (image != null)
-            //{
-            //    using MemoryStream memStream = new();
-            //    image.Save(memStream);
-            //}
+                using var stream = new MemoryStream(imageArray);
+                var fileSaverResult = await fileSaver.SaveAsync($"{Apod.Title}.jpg", stream, cancellationTokenSource.Token);
+                fileSaverResult.EnsureSuccess();
+                await Toast.Make($"File is saved: {fileSaverResult.FilePath}").Show(cancellationTokenSource.Token);
+            }
+            catch (Exception)
+            {
+                //TODO
+                throw new NotImplementedException();
+            }
         }
     }
 }
