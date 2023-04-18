@@ -50,6 +50,8 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\AppIcon\appiconfg.svg" />
+	  <None Remove="Resources\Images\home_icon.png" />
+	  <None Remove="Resources\Images\profile_icon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
