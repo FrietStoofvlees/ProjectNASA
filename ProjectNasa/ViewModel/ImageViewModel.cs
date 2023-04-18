@@ -20,8 +20,10 @@ namespace ProjectNasa.ViewModel
         }
 
         [RelayCommand]
-        async void SavePicture() 
+        async Task SavePictureAsync()
         {
+            //TODO: werkt niet op android 13 -> geen READ/WRITE_EXTERNAL_STORAGE permissions meer
+
             try
             {
                 byte[] imageArray;
@@ -36,10 +38,9 @@ namespace ProjectNasa.ViewModel
                 fileSaverResult.EnsureSuccess();
                 await Toast.Make($"File is saved: {fileSaverResult.FilePath}").Show(cancellationTokenSource.Token);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //TODO
-                throw new NotImplementedException();
+                await Toast.Make(ex.Message).Show(cancellationTokenSource.Token);
             }
         }
     }

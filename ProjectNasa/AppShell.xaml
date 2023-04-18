@@ -3,12 +3,26 @@
     x:Class="ProjectNasa.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:ProjectNasa.View"
+    xmlns:view="clr-namespace:ProjectNasa.View"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
+    <!--<ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate view:MainPage}"
+        Route="MainPage" />-->
+    
+    <TabBar x:Name="shelltabbar">
+        <ShellContent Title="Home"
+                      x:Name="shelltab_0"
+                      Icon="home_icon.png"
+                      ContentTemplate="{DataTemplate view:MainPage}" />
+        <ShellContent Title="Apod"
+                      x:Name="shelltab_1"
+                      ContentTemplate="{DataTemplate view:ApodPage}" />
+        <ShellContent Title="Profile"
+                      x:Name="shelltab_2"
+                      Icon="profile_icon.png"
+                      ContentTemplate="{DataTemplate view:MainPage}" />
+    </TabBar>
 
 </Shell>
