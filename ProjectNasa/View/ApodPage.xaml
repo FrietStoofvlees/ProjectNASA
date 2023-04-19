@@ -5,7 +5,8 @@
              xmlns:model="clr-namespace:ProjectNasa.Model"
              xmlns:viewmodel="clr-namespace:ProjectNasa.ViewModel"
              x:DataType="viewmodel:ApodViewModel"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             Shell.NavBarIsVisible="False">
 
 
     <Grid>
@@ -19,9 +20,18 @@
                 <VerticalStackLayout
                     Spacing="10"
                     Padding="10">
+
+                    <Label
+                        x:Name="lblPageTitle"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        SemanticProperties.Description="Title of the picture"
+                        Text="{Binding Title}"
+                        FontSize="25"/>
+
+
                     <Label
                         x:Name="lblTitle"
-                        FontAttributes="Bold"
                         HorizontalOptions="Center"
                         SemanticProperties.Description="Title of the picture"
                         Text="{Binding Apod.Title}"/>
