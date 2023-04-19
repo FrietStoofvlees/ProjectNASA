@@ -9,7 +9,7 @@ public partial class MainPage : ContentPage
 
 	private void OnApodPageClicked(object sender, EventArgs e)
 	{
-        ((AppShell)App.Current.MainPage).SwitchtoTab(1);
+        ((AppShell)Application.Current.MainPage).SwitchtoTab(TabPages.ApodPage);
         //await Shell.Current.GoToAsync(nameof(ApodPage), true, new Dictionary<string, object>());
 
 		SemanticScreenReader.Announce(btnApodPage.Text);

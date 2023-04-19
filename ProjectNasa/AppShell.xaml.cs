@@ -1,5 +1,6 @@
 ﻿namespace ProjectNasa;
 
+
 public partial class AppShell : Shell
 {
 	public AppShell()
@@ -9,15 +10,21 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(ImagePage), typeof(ImagePage));
     }
 
-    public void SwitchtoTab(int tabIndex)
+    public void SwitchtoTab(TabPages tabPage)
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            switch (tabIndex)
+            switch (tabPage)
             {
-                case 0: shelltabbar.CurrentItem = shelltab_0; break;
-                case 1: shelltabbar.CurrentItem = shelltab_1; break;
-                case 2: shelltabbar.CurrentItem = shelltab_2; break;
+                case TabPages.MainPage:
+                    shellTabBar.CurrentItem = tabMainPage;
+                    break;
+                case TabPages.ApodPage:
+                    shellTabBar.CurrentItem = tabApodPage;
+                    break;
+                case TabPages.ProfilePage:
+                    shellTabBar.CurrentItem = tabProfilePage;
+                    break;
             };
         });
     }
