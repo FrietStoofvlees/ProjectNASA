@@ -13,27 +13,49 @@ namespace ProjectNasa.ViewModel
 
         [ObservableProperty]
         Apod apod;
+        [ObservableProperty]
+        bool isVisible;
+
+        byte[] imageArray;
 
         public ImageViewModel(IFileSaver fileSaver)
         {
             this.fileSaver = fileSaver;
+            IsBusy = false;
+            IsVisible = true;
+        }
+
+        partial void OnApodChanged(Apod value)
+        {
+            Task.Run(GetImageBytesAsync);
+        }
+
+        async Task<byte[]> GetImageBytesAsync()
+        {
+            while (imageArray == null)
+            {
+                using HttpClient client = new();
+                imageArray = await client.GetByteArrayAsync(Apod.Hdurl);
+            }
+            return imageArray;
         }
 
         [RelayCommand]
         async Task SavePictureAsync()
         {
+             IsBusy = true;
+
 #if ANDROID33_0
             await Toast.Make("This is function is currently not supported on Android 13").Show();
                 return;
 #endif
 
+#if !ANDROID33_0
             try
             {
-                byte[] imageArray;
-
-                using (HttpClient client = new())
+                if (imageArray == null)
                 {
-                    imageArray = await client.GetByteArrayAsync(Apod.Hdurl);
+                    await GetImageBytesAsync();
                 }
 
                 using var stream = new MemoryStream(imageArray);
@@ -45,6 +67,11 @@ namespace ProjectNasa.ViewModel
             {
                 await Toast.Make(ex.Message).Show(cancellationTokenSource.Token);
             }
+            finally
+            {
+                IsBusy = false;
+            }
+#endif
         }
     }
 }

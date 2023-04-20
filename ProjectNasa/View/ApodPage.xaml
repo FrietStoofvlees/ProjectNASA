@@ -27,7 +27,7 @@
                         HorizontalOptions="Center"
                         SemanticProperties.Description="Title of the picture"
                         Text="{Binding Title}"
-                        FontSize="25"/>
+                        FontSize="24"/>
 
 
                     <Label

@@ -21,7 +21,7 @@
                     Margin="10"
                     Source="{Binding Apod.Hdurl}"
                     HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand"/>
+                    VerticalOptions="FillAndExpand" />
             </VerticalStackLayout>
 
             <Button
@@ -37,7 +37,9 @@
                 Margin="10"
                 HorizontalOptions="Center"
                 VerticalOptions="End"
-                Grid.Row="1"/>
+                Grid.Row="1"
+                IsVisible="{Binding IsVisible}"
+                IsEnabled="{Binding IsNotBusy}" />
         </Grid>
     </ScrollView>
 </ContentPage>

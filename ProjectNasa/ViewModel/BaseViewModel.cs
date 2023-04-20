@@ -12,6 +12,9 @@ namespace ProjectNasa.ViewModel
         [ObservableProperty]
         string title;
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsNotBusy))]
         bool isBusy;
+
+        public bool IsNotBusy => !IsBusy;
     }
 }
