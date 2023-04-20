@@ -8,6 +8,7 @@ public partial class AppShell : Shell
 		InitializeComponent();
         Routing.RegisterRoute(nameof(ApodPage), typeof(ApodPage));
 		Routing.RegisterRoute(nameof(ImagePage), typeof(ImagePage));
+        Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
     }
 
     public void SwitchtoTab(TabPages tabPage)

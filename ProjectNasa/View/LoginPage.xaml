@@ -4,10 +4,49 @@
              x:Class="ProjectNasa.View.LoginPage"
              Title="LoginPage"
              Shell.NavBarIsVisible="False">
-    <VerticalStackLayout>
-        <Label 
+
+    <VerticalStackLayout 
+        VerticalOptions="Center">
+        <!--<Label 
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center" />-->
+
+        <Frame 
+            Margin="10,0,10,0"
+            CornerRadius="20"
+            BorderColor="White"
+            WidthRequest="350">
+            
+            <VerticalStackLayout>
+                <Entry 
+                    x:Name="eUsername" 
+                    Text="{Binding }" Placeholder="Username" 
+                    TextColor="White" 
+                    PlaceholderColor="White" />
+
+                <Line StrokeThickness="1" BackgroundColor="Black"/>
+
+                <Entry x:Name="ePassword" 
+                       Text="{Binding }" 
+                       Placeholder="Password" 
+                       TextColor="White" 
+                       PlaceholderColor="White"
+                       IsPassword="True" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <Button
+            Margin="0,50,0,0"
+            x:Name="btnLogin"
+            Text="Login"
+            TextColor="White"
+            BackgroundColor="Black"
+            BorderColor="White"
+            BorderWidth="2"
+            CornerRadius="20"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            WidthRequest="100" />
     </VerticalStackLayout>
 </ContentPage>

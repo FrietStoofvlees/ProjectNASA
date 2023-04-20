@@ -34,6 +34,8 @@ public static class MauiProgram
 #endif
 
 		builder.Services.AddSingleton<IApodService, ApodService>();
+        builder.Services.AddSingleton<LoginPageViewModel>();
+        builder.Services.AddSingleton<LoginPage>();
         builder.Services.AddSingleton<ApodViewModel>();
         builder.Services.AddSingleton<ApodPage>();
         builder.Services.AddSingleton(FileSaver.Default);

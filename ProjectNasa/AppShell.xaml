@@ -19,8 +19,8 @@
         <ShellContent Title="Profile"
                       x:Name="tabProfilePage"
                       Icon="profile_icon.png"
-                      ContentTemplate="{DataTemplate view:MainPage}"
-                      Route="ProfilePage"/>
+                      ContentTemplate="{DataTemplate view:LoginPage}"
+                      Route="LoginPage"/>
     </TabBar>
 
 </Shell>
