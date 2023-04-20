@@ -23,6 +23,10 @@ namespace ProjectNasa.ViewModel
         async Task SavePictureAsync()
         {
             //TODO: werkt niet op android 13 -> geen READ/WRITE_EXTERNAL_STORAGE permissions meer
+#if ANDROID33_0
+            await Toast.Make("This is function is currently not supported on Android 13").Show();
+                return;
+#endif
 
             try
             {
