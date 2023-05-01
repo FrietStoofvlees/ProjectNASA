@@ -1,5 +1,5 @@
-﻿global using ProjectNasa.Model;
-global using ProjectNasa.Services;
-global using ProjectNasa.View;
-global using ProjectNasa.ViewModel;
-global using TabPages = ProjectNasa.Enums.TabPages;
+﻿global using ProjectNASA.Model;
+global using ProjectNASA.Services;
+global using ProjectNASA.View;
+global using ProjectNASA.ViewModel;
+global using TabPages = ProjectNASA.Enums.TabPages;

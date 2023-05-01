@@ -1,7 +1,9 @@
-﻿namespace ProjectNasa;
+﻿namespace ProjectNASA;
 
 public partial class App : Application
 {
+	public static User user;
+
 	public App()
 	{
 		InitializeComponent();

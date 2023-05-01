@@ -1,4 +1,4 @@
-namespace ProjectNasa.View;
+namespace ProjectNASA.View;
 
 public partial class ImagePage : ContentPage
 {

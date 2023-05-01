@@ -1,4 +1,4 @@
-﻿namespace ProjectNasa;
+﻿namespace ProjectNASA;
 
 
 public partial class AppShell : Shell

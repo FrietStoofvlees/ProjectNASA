@@ -2,7 +2,7 @@
 using CommunityToolkit.Maui.Storage;
 using Microsoft.Extensions.Logging;
 
-namespace ProjectNasa;
+namespace ProjectNASA;
 
 public static class MauiProgram
 {

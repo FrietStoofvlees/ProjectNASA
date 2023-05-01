@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectNasa.ViewModel
+namespace ProjectNASA.ViewModel
 {
     public partial class ApodViewModel : BaseViewModel
     {

@@ -3,7 +3,7 @@ using CommunityToolkit.Maui.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace ProjectNasa.ViewModel
+namespace ProjectNASA.ViewModel
 {
     [QueryProperty(nameof(Apod), "Apod")]
     public partial class ImageViewModel : BaseViewModel
