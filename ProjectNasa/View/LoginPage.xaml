@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProjectNasa.View.LoginPage"
+             x:Class="ProjectNASA.View.LoginPage"
+             xmlns:viewmodel="clr-namespace:ProjectNASA.ViewModel"
+             x:DataType="viewmodel:LoginPageViewModel"
              Title="LoginPage"
              Shell.NavBarIsVisible="False">
 
-    <VerticalStackLayout 
-        VerticalOptions="Center">
-        <!--<Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />-->
+    <VerticalStackLayout>
+
+        <Label
+            Text="Please sign in to continue to your profile"
+            />
 
         <Frame 
-            Margin="10,0,10,0"
+            Margin="0,150,0,0"
             CornerRadius="20"
+            BackgroundColor="black"
             BorderColor="White"
-            WidthRequest="350">
+            WidthRequest="325">
             
             <VerticalStackLayout>
                 <Entry 
                     x:Name="eUsername" 
-                    Text="{Binding }" Placeholder="Username" 
+                    Text="{Binding Username}"
+                    Placeholder="Username" 
                     TextColor="White" 
                     PlaceholderColor="White" />
 
                 <Line StrokeThickness="1" BackgroundColor="Black"/>
 
                 <Entry x:Name="ePassword" 
-                       Text="{Binding }" 
+                       Text="{Binding Password}" 
                        Placeholder="Password" 
                        TextColor="White" 
-                       PlaceholderColor="White"
+                       PlaceholderColor="white"
                        IsPassword="True" />
             </VerticalStackLayout>
         </Frame>
@@ -45,8 +48,12 @@
             BorderColor="White"
             BorderWidth="2"
             CornerRadius="20"
+            Command="{Binding LoginCommand}"
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand"
             WidthRequest="100" />
+
+        <Label></Label>
+        
     </VerticalStackLayout>
 </ContentPage>
