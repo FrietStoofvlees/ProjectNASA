@@ -20,7 +20,7 @@
                       x:Name="tabProfilePage"
                       Icon="profile_icon.png"
                       ContentTemplate="{DataTemplate view:LoginPage}"
-                      Route="LoginPage"/>
+                      Route="ProfilePage"/>
     </TabBar>
 
 </Shell>

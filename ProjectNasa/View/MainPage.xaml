@@ -2,41 +2,41 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProjectNASA.View.MainPage"
+             xmlns:local="clr-namespace:ProjectNASA.View"
              Shell.NavBarIsVisible="False">
 
-    <ScrollView>
+    <local:SwipeContainer>
         <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+        Spacing="25"
+        Padding="30,0"
+        VerticalOptions="Center">
 
             <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+            Source="dotnet_bot.png"
+            SemanticProperties.Description="Cute dot net bot waving hi to you!"
+            HeightRequest="200"
+            HorizontalOptions="Center" />
 
             <Label
-                Text="Hello, Space Traveler!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="28"
-                HorizontalOptions="Center" />
+            Text="Hello, Space Traveler!"
+            SemanticProperties.HeadingLevel="Level1"
+            FontSize="28"
+            HorizontalOptions="Center" />
 
             <Label
-                Text="Welcome to the Project Nasa App"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to Project Nasa App"
-                FontSize="18"
-                HorizontalOptions="Center" />
+            Text="Welcome to the Project Nasa App"
+            SemanticProperties.HeadingLevel="Level2"
+            SemanticProperties.Description="Welcome to Project Nasa App"
+            FontSize="18"
+            HorizontalOptions="Center" />
 
             <Button
-                x:Name="btnApodPage"
-                Text="Click me for the APOD!"
-                SemanticProperties.Hint="Navigates you to the Astronomy Picture of the Day."
-                Clicked="OnApodPageClicked"
-                HorizontalOptions="Center" />
+            x:Name="btnApodPage"
+            Text="Click me for the APOD!"
+            SemanticProperties.Hint="Navigates you to the Astronomy Picture of the Day."
+            Clicked="OnApodPageClicked"
+            HorizontalOptions="Center" />
 
         </VerticalStackLayout>
-    </ScrollView>
-
+    </local:SwipeContainer>
 </ContentPage>
