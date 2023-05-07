@@ -25,23 +25,17 @@ namespace ProjectNASA.ViewModel
         {
             this.loginService = loginService;
         }
-
+        
         [RelayCommand]
-        public void Login()
+        public async Task LoginAsync()
         {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
-                Toast.Make("Please fill in your username and password").Show();
+                await Toast.Make("Please fill in your username and password").Show();
+                return;
             } 
-            else
-            {
-                if (loginService.Login(Username, "", Password))
-                {
-                    ((AppShell)Application.Current.MainPage).SwitchtoTab(TabPages.ProfilePage);
-                }
-
-                //Toast.Make("Error during login").Show();
-            }
+            if (loginService.Login(Username, "", Password))
+                await Shell.Current.GoToAsync("..");
         }
     }
 }

@@ -66,14 +66,14 @@
                 IsEnabled="{Binding IsNotBusy}" />
             
             <Button
-                x:Name="btnSaveProfile"
+                x:Name="btnSaveChanges"
                 BackgroundColor="Black"
                 BorderWidth="2"
                 BorderColor="White"
-                Command="{Binding SaveProfileCommand}"
+                Command="{Binding SaveChangesCommand}"
                 CornerRadius="20"
-                SemanticProperties.Hint="Edit Profile"
-                Text="Save Profile"
+                SemanticProperties.Hint="Save changes"
+                Text="Save Changes"
                 TextColor="White"
                 Margin="10"
                 HorizontalOptions="Center"
@@ -81,6 +81,24 @@
                 Grid.Row="1"
                 IsVisible="{Binding IsBusy}"
                 IsEnabled="{Binding IsBusy}" />
+
+            <Button
+                x:Name="btnLogout"
+                BackgroundColor="Black"
+                BorderWidth="2"
+                BorderColor="White"
+                Command="{Binding LogoutCommand}"
+                CornerRadius="20"
+                SemanticProperties.Hint="Logout"
+                Text="Logout"
+                TextColor="White"
+                Margin="10"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                Grid.Row="1"
+                IsVisible="{Binding IsLoggedIn}"
+                IsEnabled="{Binding IsLoggedIn}" />
+            
         </VerticalStackLayout>
     </local:SwipeContainer>
 </ContentPage>

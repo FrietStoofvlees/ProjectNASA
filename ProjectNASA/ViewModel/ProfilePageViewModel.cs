@@ -22,22 +22,26 @@ namespace ProjectNASA.ViewModel
 
         public ProfilePageViewModel(ILoginService loginService)
         {
-            CheckUserLogin();
             this.loginService = loginService;
+            this.loginService.Logout();
         }
 
-        private async void CheckUserLogin()
+        public async Task CheckUserLogin()
         {
+            if (IsLoggedIn)
+                return;
+
             string user = Preferences.Get(nameof(App.User), "");
 
-            if (!IsLoggedIn)
+            if (string.IsNullOrWhiteSpace(user))
             {
-                if (string.IsNullOrWhiteSpace(user))
-                    await Shell.Current.GoToAsync(nameof(LoginPage));
-                IsLoggedIn = true;
+                await Shell.Current.GoToAsync(nameof(LoginPage));
+                return;
             }
 
             User = JsonSerializer.Deserialize<User>(user);
+
+            IsLoggedIn = true;
         }
 
         [RelayCommand]
@@ -47,14 +51,26 @@ namespace ProjectNASA.ViewModel
         }
 
         [RelayCommand]
-        private void SaveProfile()
+        private void SaveChanges()
         {
             if (loginService.Login(User.Username, User.Email, User.Password))
-            {
                 Toast.Make("Details saved!").Show();
-            };
 
             IsBusy = false;
+        }
+
+        [RelayCommand]
+        private async Task Logout()
+        {
+            if (!loginService.Logout())
+            {
+                await Toast.Make("Unable to logout!").Show();
+                return;
+            }
+            IsLoggedIn = false;
+            User = new User();
+            await Toast.Make("Logout succesfull!").Show();
+            await CheckUserLogin();
         }
     }
 }

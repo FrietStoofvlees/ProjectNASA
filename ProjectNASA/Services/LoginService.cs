@@ -1,9 +1,4 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace ProjectNASA.Services
 {
@@ -30,6 +25,26 @@ namespace ProjectNASA.Services
             return true;
 
             //return await Task.FromResult(user);
+        }
+
+        public bool Logout()
+        {
+            if (Preferences.ContainsKey(nameof(App.User)))
+            {
+                Preferences.Remove(nameof(App.User));
+            }
+
+            return true;
+        }
+
+        public bool Logout(string username, string password)
+        {
+            if (Preferences.ContainsKey(nameof(App.User)))
+            {
+                Preferences.Remove(nameof(App.User));
+            }
+
+            return true;
         }
     }
 }

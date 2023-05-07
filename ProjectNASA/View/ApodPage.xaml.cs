@@ -8,4 +8,3 @@ public partial class ApodPage : ContentPage
 		BindingContext = viewModel;
 	}
 }
-
