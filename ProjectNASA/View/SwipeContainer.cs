@@ -23,7 +23,7 @@ namespace ProjectNASA.View
 
         SwipeGestureRecognizer GetSwipeGestureRecognizer(SwipeDirection direction)
         {
-            SwipeGestureRecognizer swipe = new SwipeGestureRecognizer { Direction = direction };
+            SwipeGestureRecognizer swipe = new() { Direction = direction };
             swipe.Swiped += (sender, e) => Swipe?.Invoke(this, e);
             return swipe;
         }

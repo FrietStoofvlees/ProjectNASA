@@ -2,9 +2,9 @@ namespace ProjectNASA.View;
 
 public partial class ImagePage : ContentPage
 {
-	public ImagePage(ImageViewModel viewmodel)
+	public ImagePage(ImageViewModel viewModel)
 	{
 		InitializeComponent();
-		BindingContext = viewmodel;
+		BindingContext = viewModel;
 	}
 }

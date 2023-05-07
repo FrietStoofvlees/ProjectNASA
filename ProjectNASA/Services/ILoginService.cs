@@ -8,6 +8,6 @@ namespace ProjectNASA.Services
 {
     public interface ILoginService
     {
-        Task<User> Login(string username, string password);
+        bool Login(string username, string email, string password);
     }
 }

@@ -9,6 +9,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(ApodPage), typeof(ApodPage));
 		Routing.RegisterRoute(nameof(ImagePage), typeof(ImagePage));
         Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+        Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
     }
 
     public void SwitchtoTab(TabPages tabPage)

@@ -34,12 +34,16 @@ public static class MauiProgram
 #endif
 
 		builder.Services.AddSingleton<IApodService, ApodService>();
-        builder.Services.AddSingleton<LoginPageViewModel>();
-        builder.Services.AddSingleton<LoginPage>();
+        builder.Services.AddSingleton<ILoginService, LoginService>();
+
         builder.Services.AddSingleton<ApodViewModel>();
         builder.Services.AddSingleton<ApodPage>();
+        builder.Services.AddSingleton<ProfilePageViewModel>();
+        builder.Services.AddSingleton<ProfilePage>();
         builder.Services.AddSingleton(FileSaver.Default);
 
+        builder.Services.AddTransient<LoginPageViewModel>();
+        builder.Services.AddTransient<LoginPage>();
         builder.Services.AddTransient<ImageViewModel>();
 		builder.Services.AddTransient<ImagePage>();
 

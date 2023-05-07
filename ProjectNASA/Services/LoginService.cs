@@ -3,21 +3,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 
 namespace ProjectNASA.Services
 {
     public class LoginService : ILoginService
     {
-        public async Task<User> Login(string username, string password)
+        public bool Login(string username, string email, string password)
         {
             User user = new()
             {
                 Username = username,
+                Email = email,
                 Password = password
             };
 
-            return await Task.FromResult(user);
-            //await Toast.Make("Please fill in your username and password").Show();
+            if (Preferences.ContainsKey(nameof(App.User)))
+            {
+                Preferences.Remove(nameof(App.User));
+            }
+
+            string userDetails = JsonSerializer.Serialize(user);
+            Preferences.Set(nameof(App.User), userDetails);
+            App.User = user;
+
+            return true;
+
+            //return await Task.FromResult(user);
         }
     }
 }

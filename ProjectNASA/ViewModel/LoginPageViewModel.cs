@@ -21,6 +21,11 @@ namespace ProjectNASA.ViewModel
         [ObservableProperty]
         string password;
 
+        public LoginPageViewModel(ILoginService loginService)
+        {
+            this.loginService = loginService;
+        }
+
         [RelayCommand]
         public void Login()
         {
@@ -30,10 +35,12 @@ namespace ProjectNASA.ViewModel
             } 
             else
             {
-                //User user = await loginService.Login(Username, Password);
-                //App.user = user;
+                if (loginService.Login(Username, "", Password))
+                {
+                    ((AppShell)Application.Current.MainPage).SwitchtoTab(TabPages.ProfilePage);
+                }
 
-                ((AppShell)Application.Current.MainPage).SwitchtoTab(TabPages.ApodPage);
+                //Toast.Make("Error during login").Show();
             }
         }
     }

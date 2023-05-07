@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectNASA.View.ProfilePage"
+             xmlns:model="clr-namespace:ProjectNASA.Model"
+             xmlns:viewmodel="clr-namespace:ProjectNASA.ViewModel"
+             xmlns:local="clr-namespace:ProjectNASA.View"
+             x:DataType="viewmodel:ProfilePageViewModel"
+             Title="Profile">
+    
+    <local:SwipeContainer>
+        <VerticalStackLayout 
+            Padding="25">
+            <Label
+                    Text="Username:" />
+            <Frame
+                BackgroundColor="black"
+                BorderColor="White"
+                CornerRadius="20"
+                Margin="0,0,0,35"
+                WidthRequest="325">
+                <Entry 
+                    Text="{Binding User.Username}"
+                    IsEnabled="{Binding IsBusy}"/>
+            </Frame>
+            <Label
+                    Text="Email:" />
+            <Frame
+                BackgroundColor="black"
+                BorderColor="White"
+                CornerRadius="20"
+                Margin="0,0,0,35"
+                WidthRequest="325">
+                <Entry 
+                    Text="{Binding User.Email}"
+                    IsEnabled="{Binding IsBusy}"/>
+            </Frame>
+            <Label
+                    Text="Password:" />
+            <Frame
+                BackgroundColor="black"
+                BorderColor="White"
+                CornerRadius="20"
+                Margin="0,0,0,35"
+                WidthRequest="325">
+                <Entry 
+                    Text="{Binding User.Password}"
+                    IsEnabled="{Binding IsBusy}"/>
+            </Frame>
+
+            <Button
+                x:Name="btnEditProfile"
+                BackgroundColor="Black"
+                BorderWidth="2"
+                BorderColor="White"
+                Command="{Binding EditProfileCommand}"
+                CornerRadius="20"
+                SemanticProperties.Hint="Edit Profile"
+                Text="Edit Profile"
+                TextColor="White"
+                Margin="10"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                Grid.Row="1"
+                IsVisible="{Binding IsNotBusy}"
+                IsEnabled="{Binding IsNotBusy}" />
+            
+            <Button
+                x:Name="btnSaveProfile"
+                BackgroundColor="Black"
+                BorderWidth="2"
+                BorderColor="White"
+                Command="{Binding SaveProfileCommand}"
+                CornerRadius="20"
+                SemanticProperties.Hint="Edit Profile"
+                Text="Save Profile"
+                TextColor="White"
+                Margin="10"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                Grid.Row="1"
+                IsVisible="{Binding IsBusy}"
+                IsEnabled="{Binding IsBusy}" />
+        </VerticalStackLayout>
+    </local:SwipeContainer>
+</ContentPage>

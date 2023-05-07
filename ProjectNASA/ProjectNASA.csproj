@@ -71,10 +71,16 @@
 	  <Compile Update="View\ImagePage.xaml.cs">
 	    <DependentUpon>ImagePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\ProfilePage.xaml.cs">
+	    <DependentUpon>ProfilePage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="View\ImagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\ProfilePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
