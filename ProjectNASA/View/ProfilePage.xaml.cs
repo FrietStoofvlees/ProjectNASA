@@ -1,3 +1,5 @@
+using CommunityToolkit.Maui.Core.Platform;
+
 namespace ProjectNASA.View;
 
 public partial class ProfilePage : ContentPage
