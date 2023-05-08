@@ -10,95 +10,112 @@
     
     <local:SwipeContainer>
         <VerticalStackLayout 
-            Padding="25">
-            <Label
-                    Text="Username:" />
+            Padding="25"
+            VerticalOptions="Center">
+            <VerticalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding HideKeyboardCommand}"
+                    />
+            </VerticalStackLayout.GestureRecognizers>
+            
             <Frame
                 BackgroundColor="black"
                 BorderColor="White"
                 CornerRadius="20"
                 Margin="0,0,0,35"
                 WidthRequest="325">
-                <Entry 
-                    Text="{Binding User.Username}"
-                    IsEnabled="{Binding IsBusy}"/>
+                <VerticalStackLayout>
+                    <Label
+                        Text="Username:" />
+                    <Entry 
+                        Text="{Binding User.Username}"
+                        IsEnabled="{Binding IsBusy}"/>
+                </VerticalStackLayout>
             </Frame>
-            <Label
-                    Text="Email:" />
+            
             <Frame
                 BackgroundColor="black"
                 BorderColor="White"
                 CornerRadius="20"
                 Margin="0,0,0,35"
                 WidthRequest="325">
-                <Entry 
-                    Text="{Binding User.Email}"
-                    IsEnabled="{Binding IsBusy}"/>
+                <VerticalStackLayout>
+                    <Label
+                        Text="Email:" />
+                    <Entry 
+                        Text="{Binding User.Email}"
+                        IsEnabled="{Binding IsBusy}"/>
+                </VerticalStackLayout>
             </Frame>
-            <Label
-                    Text="Password:" />
+            
             <Frame
                 BackgroundColor="black"
                 BorderColor="White"
                 CornerRadius="20"
                 Margin="0,0,0,35"
                 WidthRequest="325">
-                <Entry 
-                    Text="{Binding User.Password}"
-                    IsEnabled="{Binding IsBusy}"/>
+                <VerticalStackLayout>
+                    <Label
+                        Text="Password:" />
+                    <Entry 
+                        Text="{Binding User.Password}"
+                        IsEnabled="{Binding IsBusy}"/>
+                </VerticalStackLayout>
             </Frame>
 
-            <Button
-                x:Name="btnEditProfile"
-                BackgroundColor="Black"
-                BorderWidth="2"
-                BorderColor="White"
-                Command="{Binding EditProfileCommand}"
-                CornerRadius="20"
-                SemanticProperties.Hint="Edit Profile"
-                Text="Edit Profile"
-                TextColor="White"
-                Margin="10"
-                HorizontalOptions="Center"
-                VerticalOptions="End"
-                Grid.Row="1"
-                IsVisible="{Binding IsNotBusy}"
-                IsEnabled="{Binding IsNotBusy}" />
+            <Grid
+                ColumnDefinitions="*,*">
+                <Button
+                    x:Name="btnEditProfile"
+                    BackgroundColor="Black"
+                    BorderWidth="2"
+                    BorderColor="White"
+                    Command="{Binding EditProfileCommand}"
+                    CornerRadius="20"
+                    SemanticProperties.Hint="Edit Profile"
+                    Text="Edit Profile"
+                    TextColor="White"
+                    WidthRequest="100"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    Grid.Column="0"
+                    IsVisible="{Binding IsNotBusy}"
+                    IsEnabled="{Binding IsNotBusy}" />
             
-            <Button
-                x:Name="btnSaveChanges"
-                BackgroundColor="Black"
-                BorderWidth="2"
-                BorderColor="White"
-                Command="{Binding SaveChangesCommand}"
-                CornerRadius="20"
-                SemanticProperties.Hint="Save changes"
-                Text="Save Changes"
-                TextColor="White"
-                Margin="10"
-                HorizontalOptions="Center"
-                VerticalOptions="End"
-                Grid.Row="1"
-                IsVisible="{Binding IsBusy}"
-                IsEnabled="{Binding IsBusy}" />
+                <Button
+                    x:Name="btnSaveChanges"
+                    BackgroundColor="Black"
+                    BorderWidth="2"
+                    BorderColor="White"
+                    Command="{Binding SaveChangesCommand}"
+                    CornerRadius="20"
+                    SemanticProperties.Hint="Save changes"
+                    Text="Save Changes"
+                    TextColor="White"
+                    WidthRequest="100"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    Grid.Column="0"
+                    IsVisible="{Binding IsBusy}"
+                    IsEnabled="{Binding IsBusy}" />
 
-            <Button
-                x:Name="btnLogout"
-                BackgroundColor="Black"
-                BorderWidth="2"
-                BorderColor="White"
-                Command="{Binding LogoutCommand}"
-                CornerRadius="20"
-                SemanticProperties.Hint="Logout"
-                Text="Logout"
-                TextColor="White"
-                Margin="10"
-                HorizontalOptions="Center"
-                VerticalOptions="End"
-                Grid.Row="1"
-                IsVisible="{Binding IsLoggedIn}"
-                IsEnabled="{Binding IsLoggedIn}" />
-            
+                <Button
+                    x:Name="btnLogout"
+                    BackgroundColor="Black"
+                    BorderWidth="2"
+                    BorderColor="White"
+                    Command="{Binding LogoutCommand}"
+                    CornerRadius="20"
+                    SemanticProperties.Hint="Logout"
+                    Text="Logout"
+                    TextColor="White"
+                    WidthRequest="100"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    Grid.Column="1"
+                    IsVisible="{Binding IsLoggedIn}"
+                    IsEnabled="{Binding IsLoggedIn}" />
+            </Grid>
         </VerticalStackLayout>
     </local:SwipeContainer>
 </ContentPage>

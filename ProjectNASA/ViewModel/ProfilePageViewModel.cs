@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -48,6 +49,15 @@ namespace ProjectNASA.ViewModel
         private void EditProfile()
         { 
             IsBusy = true;
+        }
+
+        [RelayCommand]
+        private static async Task HideKeyboardAsync()
+        {
+            if (KeyboardExtensions.IsSoftKeyboardShowing(default))
+            {
+                await KeyboardExtensions.HideKeyboardAsync(default, default);
+            }
         }
 
         [RelayCommand]
