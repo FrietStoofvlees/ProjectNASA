@@ -1,13 +1,7 @@
 ﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace ProjectNASA.ViewModel
 {
@@ -49,15 +43,6 @@ namespace ProjectNASA.ViewModel
         private void EditProfile()
         { 
             IsBusy = true;
-        }
-
-        [RelayCommand]
-        private static async Task HideKeyboardAsync()
-        {
-            if (KeyboardExtensions.IsSoftKeyboardShowing(default))
-            {
-                await KeyboardExtensions.HideKeyboardAsync(default, default);
-            }
         }
 
         [RelayCommand]

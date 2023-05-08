@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Storage;
+using Maui.FixesAndWorkarounds;
 using Microsoft.Extensions.Logging;
 
 namespace ProjectNASA;
@@ -22,6 +23,7 @@ public static class MauiProgram
             .UseMauiApp<App>()
             // Initialize the .NET MAUI Community Toolkit by adding the below line of code
             .UseMauiCommunityToolkit()
+            .ConfigureMauiWorkarounds()
             // After initializing the .NET MAUI Community Toolkit, optionally add additional fonts
             .ConfigureFonts(fonts =>
             {
