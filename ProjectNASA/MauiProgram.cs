@@ -23,6 +23,9 @@ public static class MauiProgram
             .UseMauiApp<App>()
             // Initialize the .NET MAUI Community Toolkit by adding the below line of code
             .UseMauiCommunityToolkit()
+            // Initialize the .net MAUI Maps NuGet package
+            .UseMauiMaps()
+            // Initialize the .NET MAUI Workarounds from @PureWeen on github
             .ConfigureMauiWorkarounds()
             // After initializing the .NET MAUI Community Toolkit, optionally add additional fonts
             .ConfigureFonts(fonts =>
@@ -37,6 +40,7 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<IApodService, ApodService>();
         builder.Services.AddSingleton<ILoginService, LoginService>();
+        builder.Services.AddSingleton<IWTIAService, WTIAService>();
 
         builder.Services.AddSingleton<ApodViewModel>();
         builder.Services.AddSingleton<ApodPage>();
