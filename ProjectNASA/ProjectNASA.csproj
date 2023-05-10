@@ -73,6 +73,9 @@
 	  <Compile Update="View\ImagePage.xaml.cs">
 	    <DependentUpon>ImagePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\WTIAPage.xaml.cs">
+	    <DependentUpon>WTIAPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\ProfilePage.xaml.cs">
 	    <DependentUpon>ProfilePage.xaml</DependentUpon>
 	  </Compile>
@@ -80,6 +83,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="View\ImagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\WTIAPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\ProfilePage.xaml">
