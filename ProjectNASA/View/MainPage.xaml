@@ -31,10 +31,10 @@
             HorizontalOptions="Center" />
 
             <Button
-            x:Name="btnApodPage"
+            x:Name="btnWTIAPage"
             Text="Click me for the APOD!"
             SemanticProperties.Hint="Navigates you to the Astronomy Picture of the Day."
-            Clicked="OnApodPageClicked"
+            Clicked="OnApodPageClickedAsync"
             HorizontalOptions="Center" />
 
         </VerticalStackLayout>

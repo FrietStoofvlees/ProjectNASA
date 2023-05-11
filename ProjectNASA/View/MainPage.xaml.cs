@@ -7,11 +7,11 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 	}
 
-	private void OnApodPageClicked(object sender, EventArgs e)
+	private async void OnApodPageClickedAsync(object sender, EventArgs e)
 	{
-        ((AppShell)Application.Current.MainPage).SwitchtoTab(TabPages.ApodPage);
-        //await Shell.Current.GoToAsync(nameof(ApodPage), true, new Dictionary<string, object>());
+        //((AppShell)Application.Current.MainPage).SwitchtoTab(TabPages.ApodPage);
+        await Shell.Current.GoToAsync(nameof(WTIAPage), true, new Dictionary<string, object>());
 
-		SemanticScreenReader.Announce(btnApodPage.Text);
+		//SemanticScreenReader.Announce(btnApodPage.Text);
 	}
 }
