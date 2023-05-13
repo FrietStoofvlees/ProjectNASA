@@ -19,9 +19,7 @@
 
             <Frame 
                 Margin="0,50,0,0"
-                CornerRadius="10"
-                BackgroundColor="black"
-                BorderColor="White"
+                Style="{StaticResource FrameStyling}"
                 WidthRequest="300">
             
                 <VerticalStackLayout>
@@ -29,11 +27,8 @@
                         x:Name="eUsername" 
                         Text="{Binding Username}"
                         Placeholder="Username" 
-                        TextColor="White" 
-                        PlaceholderColor="Gray" >
-                        <Entry.Behaviors>
-                            <tap:TapToCloseBehavior></tap:TapToCloseBehavior>
-                        </Entry.Behaviors>
+                        ReturnType="Next"
+                        Style="{StaticResource EntryStyling}">
                     </Entry>
 
                     <Entry
@@ -41,12 +36,9 @@
                         Margin="0,25,0,0"
                         Text="{Binding Password}" 
                         Placeholder="Password" 
-                        TextColor="White" 
-                        PlaceholderColor="Gray"
-                        IsPassword="True" > 
-                        <Entry.Behaviors>
-                            <tap:TapToCloseBehavior></tap:TapToCloseBehavior>
-                        </Entry.Behaviors>
+                        ReturnCommand="{Binding LoginCommand}"
+                        IsPassword="True"
+                        Style="{StaticResource EntryStyling}"> 
                     </Entry>
                 </VerticalStackLayout>
             </Frame>
@@ -55,16 +47,8 @@
                 Margin="0,50,0,0"
                 x:Name="btnLogin"
                 Text="Login"
-                TextColor="White"
-                BackgroundColor="Black"
-                BorderColor="White"
-                BorderWidth="2"
-                CornerRadius="20"
                 Command="{Binding LoginCommand}"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand"
-                WidthRequest="100" />
-
+                Style="{StaticResource ButtonStyling}" />
         </VerticalStackLayout>
     </local:SwipeContainer>
 </ContentPage>

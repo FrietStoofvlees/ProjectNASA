@@ -15,62 +15,50 @@
             VerticalOptions="Center">
             
             <Frame
-                BackgroundColor="black"
-                BorderColor="White"
-                CornerRadius="20"
                 Margin="0,0,0,35"
+                Style="{StaticResource FrameStyling}"
                 WidthRequest="325">
                 <VerticalStackLayout>
                     <Label
                         Text="Username:" />
                     <Entry
                         x:Name="eUsername"
-                        Text="{Binding User.Username}"
-                        IsEnabled="{Binding IsBusy}">
-                        <Entry.Behaviors>
-                            <tap:TapToCloseBehavior></tap:TapToCloseBehavior>
-                        </Entry.Behaviors>
-                    </Entry>
+                        IsEnabled="{Binding IsBusy}"
+                        ReturnType="Next"
+                        Style="{StaticResource EntryStyling}"
+                        Text="{Binding User.Username}" />
                 </VerticalStackLayout>
             </Frame>
             
             <Frame
-                BackgroundColor="black"
-                BorderColor="White"
-                CornerRadius="20"
                 Margin="0,0,0,35"
+                Style="{StaticResource FrameStyling}"
                 WidthRequest="325">
                 <VerticalStackLayout>
                     <Label
                         Text="Email:" />
                     <Entry
                         x:Name="eEmail"
-                        Text="{Binding User.Email}"
-                        IsEnabled="{Binding IsBusy}">
-                        <Entry.Behaviors>
-                            <tap:TapToCloseBehavior></tap:TapToCloseBehavior>
-                        </Entry.Behaviors>
-                    </Entry>
+                        IsEnabled="{Binding IsBusy}"
+                        ReturnType="Next"
+                        Style="{StaticResource EntryStyling}"
+                        Text="{Binding User.Email}" />
                 </VerticalStackLayout>
             </Frame>
             
             <Frame
-                BackgroundColor="black"
-                BorderColor="White"
-                CornerRadius="20"
                 Margin="0,0,0,35"
+                Style="{StaticResource FrameStyling}"
                 WidthRequest="325">
                 <VerticalStackLayout>
                     <Label
                         Text="Password:" />
                     <Entry
                         x:Name="ePassword"
-                        Text="{Binding User.Password}"
-                        IsEnabled="{Binding IsBusy}" >
-                        <Entry.Behaviors>
-                            <tap:TapToCloseBehavior></tap:TapToCloseBehavior>
-                        </Entry.Behaviors>
-                    </Entry>
+                        IsEnabled="{Binding IsBusy}"
+                        ReturnType="Done"
+                        Style="{StaticResource EntryStyling}"
+                        Text="{Binding User.Password}" />
                 </VerticalStackLayout>
             </Frame>
 
@@ -78,52 +66,34 @@
                 ColumnDefinitions="*,*">
                 <Button
                     x:Name="btnEditProfile"
-                    BackgroundColor="Black"
-                    BorderWidth="2"
-                    BorderColor="White"
                     Command="{Binding EditProfileCommand}"
-                    CornerRadius="20"
-                    SemanticProperties.Hint="Edit Profile"
+                    SemanticProperties.Hint="Edit profile"
                     Text="Edit Profile"
-                    TextColor="White"
-                    WidthRequest="100"
-                    HorizontalOptions="Center"
                     VerticalOptions="End"
                     Grid.Column="0"
+                    Style="{StaticResource ButtonStyling}"
                     IsVisible="{Binding IsNotBusy}"
                     IsEnabled="{Binding IsNotBusy}" />
             
                 <Button
                     x:Name="btnSaveChanges"
-                    BackgroundColor="Black"
-                    BorderWidth="2"
-                    BorderColor="White"
                     Command="{Binding SaveChangesCommand}"
-                    CornerRadius="20"
-                    SemanticProperties.Hint="Save changes"
-                    Text="Save Changes"
-                    TextColor="White"
-                    WidthRequest="100"
-                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Save changes made"
+                    Text="Save"
                     VerticalOptions="End"
                     Grid.Column="0"
+                    Style="{StaticResource ButtonStyling}"
                     IsVisible="{Binding IsBusy}"
                     IsEnabled="{Binding IsBusy}" />
 
                 <Button
                     x:Name="btnLogout"
-                    BackgroundColor="Black"
-                    BorderWidth="2"
-                    BorderColor="White"
                     Command="{Binding LogoutCommand}"
-                    CornerRadius="20"
                     SemanticProperties.Hint="Logout"
                     Text="Logout"
-                    TextColor="White"
-                    WidthRequest="100"
-                    HorizontalOptions="Center"
                     VerticalOptions="End"
                     Grid.Column="1"
+                    Style="{StaticResource ButtonStyling}"
                     IsVisible="{Binding IsLoggedIn}"
                     IsEnabled="{Binding IsLoggedIn}" />
             </Grid>
