@@ -12,10 +12,11 @@
                       Icon="home_icon.png"
                       ContentTemplate="{DataTemplate view:MainPage}"
                       Route="MainPage"/>
-        <ShellContent Title="Apod"
+        <ShellContent Title="Gallery"
                       x:Name="tabGalleryPage"
+                      Icon="gallery_icon.png"
                       ContentTemplate="{DataTemplate view:GalleryPage}"
-                      Route="ApodPage"/>
+                      Route="GalleryPage"/>
         <ShellContent Title="Profile"
                       x:Name="tabProfilePage"
                       Icon="profile_icon.png"
