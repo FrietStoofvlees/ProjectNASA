@@ -7,7 +7,8 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
         Routing.RegisterRoute(nameof(ApodPage), typeof(ApodPage));
-		Routing.RegisterRoute(nameof(ImagePage), typeof(ImagePage));
+        Routing.RegisterRoute(nameof(GalleryPage), typeof(GalleryPage));
+        Routing.RegisterRoute(nameof(ImagePage), typeof(ImagePage));
         Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
         Routing.RegisterRoute(nameof(WTIAPage), typeof(WTIAPage));
@@ -22,8 +23,8 @@ public partial class AppShell : Shell
                 case TabPages.MainPage:
                     shellTabBar.CurrentItem = tabMainPage;
                     break;
-                case TabPages.ApodPage:
-                    shellTabBar.CurrentItem = tabApodPage;
+                case TabPages.GalleryPage:
+                    shellTabBar.CurrentItem = tabGalleryPage;
                     break;
                 case TabPages.ProfilePage:
                     shellTabBar.CurrentItem = tabProfilePage;

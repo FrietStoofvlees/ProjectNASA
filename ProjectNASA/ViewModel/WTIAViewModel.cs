@@ -3,7 +3,6 @@ using Android.Content.PM;
 using Android.OS;
 #endif
 using CommunityToolkit.Maui.Alerts;
-
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace ProjectNASA.ViewModel

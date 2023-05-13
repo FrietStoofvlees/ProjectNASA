@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectNASA
+namespace ProjectNASA.ViewModel
 {
-    public class Enums
+    public class GalleryPageViewModel : BaseViewModel
     {
-        public enum TabPages
+        public GalleryPageViewModel()
         {
-            MainPage,
-            GalleryPage,
-            ProfilePage
         }
     }
 }

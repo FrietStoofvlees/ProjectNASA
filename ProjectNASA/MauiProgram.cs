@@ -46,6 +46,8 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<ApodViewModel>();
         builder.Services.AddSingleton<ApodPage>();
+        builder.Services.AddSingleton<GalleryPageViewModel>();
+        builder.Services.AddSingleton<GalleryPage>();
         builder.Services.AddSingleton<ProfilePageViewModel>();
         builder.Services.AddSingleton<ProfilePage>();
         builder.Services.AddSingleton<WTIAViewModel>();
@@ -55,7 +57,6 @@ public static class MauiProgram
         builder.Services.AddTransient<LoginPage>();
         builder.Services.AddTransient<ImageViewModel>();
 		builder.Services.AddTransient<ImagePage>();
-
 
         return builder.Build();
 	}

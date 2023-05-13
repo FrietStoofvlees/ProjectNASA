@@ -13,8 +13,8 @@
                       ContentTemplate="{DataTemplate view:MainPage}"
                       Route="MainPage"/>
         <ShellContent Title="Apod"
-                      x:Name="tabApodPage"
-                      ContentTemplate="{DataTemplate view:ApodPage}"
+                      x:Name="tabGalleryPage"
+                      ContentTemplate="{DataTemplate view:GalleryPage}"
                       Route="ApodPage"/>
         <ShellContent Title="Profile"
                       x:Name="tabProfilePage"
