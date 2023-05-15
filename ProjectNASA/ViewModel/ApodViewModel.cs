@@ -72,5 +72,21 @@ namespace ProjectNASA.ViewModel
 
             SemanticScreenReader.Announce("Picture in High Definition:" + apod.Title);  
         }
+
+        [RelayCommand]
+        async Task FavoriteApodAsync()
+        {
+            //await Shell.Current.GoToAsync($"..?Apod={Apod}");
+            await Shell.Current.GoToAsync("..", true, new Dictionary<string, object>
+            {
+                {"Apod", Apod }
+            });
+        }
+
+        [RelayCommand]
+        async Task GoBackAsync()
+        {
+            await Shell.Current.GoToAsync("..");
+        }
     }
 }

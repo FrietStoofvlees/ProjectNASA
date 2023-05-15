@@ -7,8 +7,6 @@
              x:DataType="viewmodel:ApodViewModel"
              Title="{Binding Title}"
              Shell.NavBarIsVisible="False">
-
-
     <Grid>
         <RefreshView
             Command="{Binding GetApodCommand}"
@@ -72,6 +70,14 @@
                             HorizontalOptions="End"/>
                     </Grid>
 
+                    <Button
+                        x:Name="btnApod"
+                        Text="Favorite me!"
+                        SemanticProperties.Hint="Favorite this Astronomical Picture of the Day."
+                        Command="{Binding FavoriteApodCommand}"
+                        Style="{StaticResource ButtonStyling}"
+                        IsEnabled="{Binding IsNotBusy}"
+                        IsVisible="{Binding IsNotBusy}" />
                 </VerticalStackLayout>
             </ScrollView>
         </RefreshView>
@@ -79,7 +85,7 @@
         <ActivityIndicator
             IsVisible="{Binding IsBusy}"
             IsRunning="{Binding IsBusy}"
-            SemanticProperties.Description="Loading Astronomical Picture of the Day"
+            SemanticProperties.Description="Loading Astronomical Picture of the Day."
             HorizontalOptions="Center"
             VerticalOptions="Center"/>
        

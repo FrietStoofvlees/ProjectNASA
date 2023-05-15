@@ -8,7 +8,6 @@
              Title="{Binding Apod.Title}"
              Shell.NavBarIsVisible="True">
     <ScrollView>
-
         <Grid
             RowDefinitions="*, 100">
             <VerticalStackLayout
