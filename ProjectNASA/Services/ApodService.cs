@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Globalization;
 using System.Net;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjectNASA.Services
 {
@@ -17,6 +13,34 @@ namespace ProjectNASA.Services
         {
             apod = new();
             httpClient = new();
+        }
+
+        public async Task<Apod> GetAstronomyPictureofGivenDateAsync(DateTime dateTime)
+        {
+            if (dateTime == DateTime.Today)
+            {
+                return await GetAstronomyPictureoftheDayAsync();
+            }
+
+            string formattedDate = dateTime.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
+
+            HttpResponseMessage response = await httpClient.GetAsync("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=" + formattedDate);
+
+            if (response.IsSuccessStatusCode)
+            {
+                apod = (await response.Content.ReadFromJsonAsync<List<Apod>>()).FirstOrDefault();
+
+                response = await httpClient.GetAsync($"{apod.Hdurl}");
+
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    apod.Hdurl = apod.Url;
+                }
+            }
+
+            response.Dispose();
+
+            return apod;
         }
 
         public async Task<Apod> GetAstronomyPictureoftheDayAsync()
@@ -35,7 +59,6 @@ namespace ProjectNASA.Services
                 }
             }
 
-            httpClient.Dispose();
             response.Dispose();
 
             return apod;

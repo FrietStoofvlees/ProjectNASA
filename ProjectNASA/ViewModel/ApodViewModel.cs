@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace ProjectNASA.ViewModel
 {
+    [QueryProperty(nameof(SelectedDate), "SelectedDate")]
     public partial class ApodViewModel : BaseViewModel
     {
         readonly IApodService apodService;
@@ -10,6 +11,9 @@ namespace ProjectNASA.ViewModel
 
         [ObservableProperty]
         Apod apod;
+
+        [ObservableProperty]
+        DateTime selectedDate;
 
         [ObservableProperty]
         bool isRefreshing;
@@ -20,8 +24,6 @@ namespace ProjectNASA.ViewModel
             this.connectivity = connectivity;
 
             Title = "Astronomy Picture of the Day!";
-
-            Task.Run(GetApodAsync);
         }
 
         [RelayCommand]
@@ -42,11 +44,11 @@ namespace ProjectNASA.ViewModel
                 if (Apod != null)
                 {
                     if (Apod.Date < DateOnly.FromDateTime(DateTime.Now))
-                        Apod = await apodService.GetAstronomyPictureoftheDayAsync();
+                        Apod = await apodService.GetAstronomyPictureofGivenDateAsync(SelectedDate);
                     else return;
                 }
                 else
-                    Apod = await apodService.GetAstronomyPictureoftheDayAsync();
+                    Apod = await apodService.GetAstronomyPictureofGivenDateAsync(SelectedDate);
             }
             catch (Exception ex)
             {

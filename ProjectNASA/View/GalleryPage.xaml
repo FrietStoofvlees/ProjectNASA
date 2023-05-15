@@ -17,7 +17,7 @@
                 Spacing="25">
                 <DatePicker
                     x:Name="datePicker"
-                    Date="{Binding SelectedDate}" />
+                    Date="{Binding SelectedDate, Mode=TwoWay}" />
                 
                 <Button
                     x:Name="btnGetApod"

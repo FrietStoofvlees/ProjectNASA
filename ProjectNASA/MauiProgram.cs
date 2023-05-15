@@ -44,8 +44,6 @@ public static class MauiProgram
         builder.Services.AddSingleton(Connectivity.Current);
         builder.Services.AddSingleton(FileSaver.Default);
 
-        builder.Services.AddSingleton<ApodViewModel>();
-        builder.Services.AddSingleton<ApodPage>();
         builder.Services.AddSingleton<GalleryPageViewModel>();
         builder.Services.AddSingleton<GalleryPage>();
         builder.Services.AddSingleton<ProfilePageViewModel>();
@@ -53,6 +51,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<WTIAViewModel>();
         builder.Services.AddSingleton<WTIAPage>();
 
+        builder.Services.AddTransient<ApodViewModel>();
+        builder.Services.AddTransient<ApodPage>();
         builder.Services.AddTransient<LoginPageViewModel>();
         builder.Services.AddTransient<LoginPage>();
         builder.Services.AddTransient<ImageViewModel>();

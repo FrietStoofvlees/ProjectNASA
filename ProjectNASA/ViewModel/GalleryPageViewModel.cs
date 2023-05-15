@@ -38,8 +38,10 @@ namespace ProjectNASA.ViewModel
         [RelayCommand]
         async Task GoToApodPageAsync()
         {
-            //await Shell.Current.GoToAsync(nameof(ApodPage));
-            await Shell.Current.GoToAsync(nameof(ApodPage), true, new Dictionary<string, object>());
+            await Shell.Current.GoToAsync(nameof(ApodPage), true, new Dictionary<string, object>()
+            {
+                {"SelectedDate", SelectedDate }
+            });
         }
 
         [RelayCommand]
