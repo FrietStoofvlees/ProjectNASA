@@ -6,14 +6,34 @@
              xmlns:viewmodel="clr-namespace:ProjectNASA.ViewModel"
              xmlns:local="clr-namespace:ProjectNASA.View"
              xmlns:tap="clr-namespace:Maui.FixesAndWorkarounds;assembly=PureWeen.Maui.FixesAndWorkarounds"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodel:ProfilePageViewModel"
              Title="Profile">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior 
+            EventName="Appearing"
+            Command="{Binding CheckUserLoginCommand}" 
+            CommandParameter="{StaticResource False}"/>
+    </ContentPage.Behaviors>
+    
+    <Shell.TitleView>
+        <HorizontalStackLayout HorizontalOptions="End">
+            <!--https://github.com/dotnet/maui/issues/9734-->
+            <Button
+                BackgroundColor="Transparent"
+                Text="Settings"
+                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                Padding="0"
+                Command="{Binding EditProfileCommand}"
+                HorizontalOptions="CenterAndExpand"
+                HeightRequest="30" />
+        </HorizontalStackLayout>
+    </Shell.TitleView>
     
     <local:SwipeContainer>
         <VerticalStackLayout 
-            Padding="25"
+            Padding="10"
             VerticalOptions="Center">
-            
             <Frame
                 Margin="0,0,0,35"
                 Style="{StaticResource FrameStyling}"

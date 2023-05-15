@@ -4,6 +4,7 @@
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              xmlns:lib="clr-namespace:ProjectNASA.Library"
              xmlns:local="clr-namespace:ProjectNASA"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:tap="clr-namespace:Maui.FixesAndWorkarounds;assembly=PureWeen.Maui.FixesAndWorkarounds"
              x:Class="ProjectNASA.App">
     <Application.Resources>
@@ -12,6 +13,9 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <system:Boolean x:Key="True">true</system:Boolean>
+            <system:Boolean x:Key="False">false</system:Boolean>
 
             <Style x:Key="ButtonStyling" TargetType="Button">
                 <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />

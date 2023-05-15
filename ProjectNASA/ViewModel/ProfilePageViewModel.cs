@@ -21,7 +21,8 @@ namespace ProjectNASA.ViewModel
             this.loginService.Logout();
         }
 
-        public async Task CheckUserLogin()
+        [RelayCommand]
+        async Task CheckUserLoginAsync(bool animate)
         {
             if (IsLoggedIn)
                 return;
@@ -30,7 +31,7 @@ namespace ProjectNASA.ViewModel
 
             if (string.IsNullOrWhiteSpace(user))
             {
-                await Shell.Current.GoToAsync(nameof(LoginPage));
+                await Shell.Current.GoToAsync(nameof(LoginPage), animate);
                 return;
             }
 
@@ -65,7 +66,7 @@ namespace ProjectNASA.ViewModel
             IsLoggedIn = false;
             User = new User();
             await Toast.Make("Logout succesfull!").Show();
-            await CheckUserLogin();
+            await CheckUserLoginAsync(true);
         }
     }
 }

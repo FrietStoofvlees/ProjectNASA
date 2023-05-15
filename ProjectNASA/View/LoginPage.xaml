@@ -8,9 +8,7 @@
              x:DataType="viewmodel:LoginPageViewModel"
              Title="LoginPage"
              Shell.NavBarIsVisible="False">
-
     <local:SwipeContainer>
-        
         <VerticalStackLayout>
             <Label
                 Margin="0,75,0,0"
