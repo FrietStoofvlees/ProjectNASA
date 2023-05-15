@@ -6,5 +6,5 @@ public partial class WTIAPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
-	}
+    }
 }

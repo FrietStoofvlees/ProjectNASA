@@ -2,8 +2,8 @@
 using Android.Content.PM;
 using Android.OS;
 #endif
-using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace ProjectNASA.ViewModel
 {
@@ -19,11 +19,15 @@ namespace ProjectNASA.ViewModel
         {
             this.wTIAService = wTIAService;
             this.connectivity = connectivity;
+        }
 
-            if (!IsMapsSDKApiKeySet())
-            {
-                Toast.Make("No API Key provided for the Maps SDK for Android! Google map features are disabled").Show();
-            }
+        [RelayCommand]
+        static async Task WTIAPageLoadedAsync()
+        {
+            if (IsMapsSDKApiKeySet())
+                return;
+
+            await Shell.Current.DisplayAlert("Warning", $"No API Key provided for the Maps SDK for Android. {System.Environment.NewLine} {System.Environment.NewLine} Google Maps features are disabled!", "OK");
         }
 
         private static bool IsMapsSDKApiKeySet()
