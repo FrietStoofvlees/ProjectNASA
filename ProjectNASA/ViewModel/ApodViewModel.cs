@@ -82,11 +82,5 @@ namespace ProjectNASA.ViewModel
                 {"Apod", Apod }
             });
         }
-
-        [RelayCommand]
-        async Task GoBackAsync()
-        {
-            await Shell.Current.GoToAsync("..");
-        }
     }
 }
