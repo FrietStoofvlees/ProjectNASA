@@ -34,7 +34,6 @@
                         Text="{Binding Title}"
                         FontSize="24"/>
 
-
                     <Label
                         x:Name="lblTitle"
                         HorizontalOptions="Center"
@@ -95,6 +94,5 @@
             SemanticProperties.Description="Loading Astronomical Picture of the Day."
             HorizontalOptions="Center"
             VerticalOptions="Center"/>
-       
     </Grid>
 </ContentPage>

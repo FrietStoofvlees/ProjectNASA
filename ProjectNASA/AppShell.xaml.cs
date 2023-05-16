@@ -7,6 +7,7 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
         Routing.RegisterRoute(nameof(ApodPage), typeof(ApodPage));
+        Routing.RegisterRoute(nameof(FavoriteDetailsPage), typeof(FavoriteDetailsPage));
         Routing.RegisterRoute(nameof(GalleryPage), typeof(GalleryPage));
         Routing.RegisterRoute(nameof(ImagePage), typeof(ImagePage));
         Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));

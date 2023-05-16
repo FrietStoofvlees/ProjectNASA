@@ -53,6 +53,8 @@ public static class MauiProgram
 
         builder.Services.AddTransient<ApodViewModel>();
         builder.Services.AddTransient<ApodPage>();
+        builder.Services.AddTransient<FavoriteDetailsViewModel>();
+        builder.Services.AddTransient<FavoriteDetailsPage>();
         builder.Services.AddTransient<LoginPageViewModel>();
         builder.Services.AddTransient<LoginPage>();
         builder.Services.AddTransient<ImageViewModel>();

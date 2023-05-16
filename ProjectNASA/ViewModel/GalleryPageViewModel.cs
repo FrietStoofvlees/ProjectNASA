@@ -21,11 +21,11 @@ namespace ProjectNASA.ViewModel
             get { return apod; }
             set
             {
-                if (!FavoriteApods.Contains(value))
+                apod = value;
+                if (!FavoriteApods.Contains(apod))
                 {
-                    FavoriteApods.Add(value);
+                    FavoriteApods.Add(apod);
                 }
-                apod = null;
             }
         }
 
@@ -40,13 +40,28 @@ namespace ProjectNASA.ViewModel
         {
             await Shell.Current.GoToAsync(nameof(ApodPage), true, new Dictionary<string, object>()
             {
-                {"SelectedDate", SelectedDate }
+                { "SelectedDate", SelectedDate }
+            });
+        }
+
+        [RelayCommand]
+        async Task GoToFavoriteDetailsPageAsync(Apod apod)
+        {
+            if (apod == null)
+                return;
+
+            await Shell.Current.GoToAsync(nameof(FavoriteDetailsPage), true, new Dictionary<string, object>()
+            {
+                { "Apod", apod }
             });
         }
 
         [RelayCommand]
         void RemoveApod(Apod apod)
         {
+            if (apod == null)
+                return;
+
             FavoriteApods.Remove(apod);
         }
     }

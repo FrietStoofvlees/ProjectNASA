@@ -70,6 +70,9 @@
 	  <Compile Update="View\ApodPage.xaml.cs">
 	    <DependentUpon>ApodPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\FavoriteDetailsPage.xaml.cs">
+	    <DependentUpon>FavoriteDetailsPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\ImagePage.xaml.cs">
 	    <DependentUpon>ImagePage.xaml</DependentUpon>
 	  </Compile>
@@ -82,6 +85,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="View\FavoriteDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\GalleryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
