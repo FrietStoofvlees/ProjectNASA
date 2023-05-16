@@ -40,7 +40,8 @@
 
             <CollectionView 
                 ItemsSource="{Binding FavoriteApods}"
-                SelectionMode="None">
+                SelectionMode="None"
+                HeightRequest="350">
                 <CollectionView.EmptyView>
                     <StackLayout Padding="100">
                         <Image
@@ -66,7 +67,9 @@
                                 </SwipeItems>
                             </SwipeView.LeftItems>
                             
-                            <Grid Padding="5">
+                            <Grid 
+                                HeightRequest="300"
+                                Padding="5">
                                 <Frame
                                     Padding="0"
                                     CornerRadius="15">
