@@ -7,40 +7,21 @@
              xmlns:local="clr-namespace:ProjectNASA.View"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodel:GalleryPageViewModel"
-             Title="GalleryPage">
+             Title="GalleryPage"
+             Shell.NavBarIsVisible="False">
     <local:SwipeContainer>
         <VerticalStackLayout>
             <Label
-                FontSize="Subtitle"
+                Text="Favorite Images"
+                FontAttributes="Bold"
+                FontSize="Title"
                 HorizontalOptions="Center"
-                Margin="0,15,0,0"
-                SemanticProperties.Description="Pick a date and explore the cosmos!"
-                Text="Pick a date and explore the cosmos!" />
-            <HorizontalStackLayout
-                HorizontalOptions="Center"
-                Padding="10"
-                Margin="0,15,0,15"
-                Spacing="25">
-                <DatePicker
-                    x:Name="datePicker"
-                    Date="{Binding SelectedDate, Mode=TwoWay}" />
-                
-                <Button
-                    x:Name="btnGetApod"
-                    Text="Go!"
-                    SemanticProperties.Hint="Navigates you to the Astronomy Picture of the chosen Day."
-                    Style="{StaticResource ButtonStyling}">
-                    <Button.Behaviors>
-                        <toolkit:EventToCommandBehavior 
-                            EventName="Clicked"
-                            Command="{Binding GoToApodPageCommand}" />
-                    </Button.Behaviors>
-                </Button>
-            </HorizontalStackLayout>
+                Margin="10" />
 
             <CollectionView 
                 ItemsSource="{Binding FavoriteApods}"
-                SelectionMode="None">
+                SelectionMode="None"
+                HeightRequest="400">
                 <CollectionView.EmptyView>
                     <StackLayout Padding="100">
                         <Image
@@ -60,13 +41,14 @@
                                     <SwipeItem 
                                         Text="Delete"
                                         IconImageSource="gallery_icon.png"
-                                        BackgroundColor="LightPink"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GalleryPageViewModel}}, Path=RemoveApodCommand}"
-                                        CommandParameter="{Binding .}"/>
+                                        CommandParameter="{Binding .}" />
                                 </SwipeItems>
                             </SwipeView.LeftItems>
                             
-                            <Grid Padding="5">
+                            <Grid 
+                                HeightRequest="200"
+                                Padding="5">
                                 <Frame
                                     Padding="0"
                                     CornerRadius="15">
@@ -102,6 +84,32 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            
+            <Label
+                FontSize="Subtitle"
+                HorizontalOptions="Center"
+                Margin="0,5,0,10"
+                SemanticProperties.Description="Pick a date and explore the cosmos!"
+                Text="Pick a date and explore the cosmos!" />
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="25">
+                <DatePicker
+                    x:Name="datePicker"
+                    Date="{Binding SelectedDate, Mode=TwoWay}" />
+                <Button
+                    x:Name="btnGetApod"
+                    Text="Go!"
+                    SemanticProperties.Hint="Navigates you to the Astronomy Picture of the chosen Day."
+                    Style="{StaticResource ButtonStyling}"
+                    WidthRequest="75">
+                    <Button.Behaviors>
+                        <toolkit:EventToCommandBehavior 
+                            EventName="Clicked"
+                            Command="{Binding GoToApodPageCommand}" />
+                    </Button.Behaviors>
+                </Button>
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </local:SwipeContainer>
 </ContentPage>
