@@ -1,8 +1,8 @@
 namespace ProjectNASA.View;
 
-public partial class WTIAPage : ContentPage
+public partial class WtiaPage : ContentPage
 {
-	public WTIAPage(WTIAViewModel viewModel)
+	public WtiaPage(WtiaViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;

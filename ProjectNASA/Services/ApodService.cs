@@ -6,12 +6,10 @@ namespace ProjectNASA.Services
 {
     public class ApodService : IApodService
     {
-        Apod apod;
         readonly HttpClient httpClient;
 
         public ApodService()
         {
-            apod = new();
             httpClient = new();
         }
 
@@ -21,6 +19,8 @@ namespace ProjectNASA.Services
             {
                 return await GetAstronomyPictureoftheDayAsync();
             }
+
+            Apod apod = new();
 
             string formattedDate = dateTime.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
 
@@ -39,12 +39,13 @@ namespace ProjectNASA.Services
             }
 
             response.Dispose();
-
             return apod;
         }
 
         public async Task<Apod> GetAstronomyPictureoftheDayAsync()
         {
+            Apod apod = new();
+
             HttpResponseMessage response = await httpClient.GetAsync("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY");
 
             if (response.IsSuccessStatusCode)
@@ -60,7 +61,6 @@ namespace ProjectNASA.Services
             }
 
             response.Dispose();
-
             return apod;
         }
     }

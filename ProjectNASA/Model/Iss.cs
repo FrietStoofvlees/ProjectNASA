@@ -1,7 +1,11 @@
 ﻿namespace ProjectNASA.Model
 {
-    public class ISS
+    public class Iss
     {
+        public Iss()
+        {
+            Id = 25544; // ISS NORAD catalog id = 25544
+        }
         public string Name { get; set; }
         public int Id { get; set; }
         public double Latitude { get; set; }
