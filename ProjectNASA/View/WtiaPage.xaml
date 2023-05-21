@@ -4,14 +4,15 @@
              xmlns:viewmodel="clr-namespace:ProjectNASA.ViewModel"
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="ProjectNASA.View.WTIAPage"
-             x:DataType="viewmodel:WTIAViewModel"
+             x:Class="ProjectNASA.View.WtiaPage"
+             x:DataType="viewmodel:WtiaViewModel"
              Title="Where The ISS At?">
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior 
             EventName="Loaded"
-            Command="{Binding WTIAPageLoadedCommand}"/>
+            Command="{Binding WtiaPageLoadedCommand}"/>
     </ContentPage.Behaviors>
     <maps:Map x:Name="map"
               IsShowingUser="true"/>
 </ContentPage>
+    

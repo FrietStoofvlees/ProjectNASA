@@ -52,6 +52,7 @@
 	  <None Remove="Resources\AppIcon\appiconfg.svg" />
 	  <None Remove="Resources\Images\home_icon.png" />
 	  <None Remove="Resources\Images\profile_icon.png" />
+	  <None Remove="Resources\Images\remove_image_icon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -76,8 +77,8 @@
 	  <Compile Update="View\ImagePage.xaml.cs">
 	    <DependentUpon>ImagePage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\WTIAPage.xaml.cs">
-	    <DependentUpon>WTIAPage.xaml</DependentUpon>
+	  <Compile Update="View\WtiaPage.xaml.cs">
+	    <DependentUpon>WtiaPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="View\ProfilePage.xaml.cs">
 	    <DependentUpon>ProfilePage.xaml</DependentUpon>
@@ -94,7 +95,7 @@
 	  <MauiXaml Update="View\ImagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\WTIAPage.xaml">
+	  <MauiXaml Update="View\WtiaPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\ProfilePage.xaml">

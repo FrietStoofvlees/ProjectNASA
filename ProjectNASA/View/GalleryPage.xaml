@@ -27,8 +27,8 @@
                         <Image
                             HorizontalOptions="Center"
                             Source="gallery_icon.png"
-                            HeightRequest="160"
-                            WidthRequest="160"
+                            HeightRequest="96"
+                            WidthRequest="96"
                             VerticalOptions="Center" />
                     </StackLayout>
                 </CollectionView.EmptyView>
@@ -39,8 +39,7 @@
                             <SwipeView.LeftItems>
                                 <SwipeItems>
                                     <SwipeItem 
-                                        Text="Delete"
-                                        IconImageSource="gallery_icon.png"
+                                        IconImageSource="remove_image_icon.png"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GalleryPageViewModel}}, Path=RemoveApodCommand}"
                                         CommandParameter="{Binding .}" />
                                 </SwipeItems>
@@ -113,3 +112,4 @@
         </VerticalStackLayout>
     </local:SwipeContainer>
 </ContentPage>
+    

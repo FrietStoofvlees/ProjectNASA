@@ -7,30 +7,30 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace ProjectNASA.ViewModel
 {
-    public partial class WTIAViewModel : BaseViewModel
+    public partial class WtiaViewModel : BaseViewModel
     {
         readonly IConnectivity connectivity;
-        readonly IWTIAService wTIAService;
+        readonly IWtiaService wtiaService;
 
         [ObservableProperty]
-        ISS iss;
+        Iss iss;
 
-        public WTIAViewModel(IWTIAService wTIAService, IConnectivity connectivity)
+        public WtiaViewModel(IWtiaService wtiaService, IConnectivity connectivity)
         {
-            this.wTIAService = wTIAService;
+            this.wtiaService = wtiaService;
             this.connectivity = connectivity;
         }
 
         [RelayCommand]
-        static async Task WTIAPageLoadedAsync()
+        static async Task WtiaPageLoadedAsync()
         {
-            if (IsMapsSDKApiKeySet())
+            if (IsMapsSdkApiKeySet())
                 return;
 
             await Shell.Current.DisplayAlert("Warning", $"No API Key provided for the Maps SDK for Android. {System.Environment.NewLine} {System.Environment.NewLine} Google Maps features are disabled!", "OK");
         }
 
-        private static bool IsMapsSDKApiKeySet()
+        private static bool IsMapsSdkApiKeySet()
         {
             /*
             [Register("getPackageInfo", "(Ljava/lang/String;Landroid/content/pm/PackageManager$PackageInfoFlags;)Landroid/content/pm/PackageInfo;", "GetGetPackageInfo_Ljava_lang_String_Landroid_content_pm_PackageManager_PackageInfoFlags_Handler", ApiSince = 33)]

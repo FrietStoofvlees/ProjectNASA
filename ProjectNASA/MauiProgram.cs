@@ -40,7 +40,7 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<IApodService, ApodService>();
         builder.Services.AddSingleton<ILoginService, LoginService>();
-        builder.Services.AddSingleton<IWTIAService, WTIAService>();
+        builder.Services.AddSingleton<IWtiaService, WtiaService>();
         builder.Services.AddSingleton(Connectivity.Current);
         builder.Services.AddSingleton(FileSaver.Default);
 
@@ -48,8 +48,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<GalleryPage>();
         builder.Services.AddSingleton<ProfilePageViewModel>();
         builder.Services.AddSingleton<ProfilePage>();
-        builder.Services.AddSingleton<WTIAViewModel>();
-        builder.Services.AddSingleton<WTIAPage>();
+        builder.Services.AddSingleton<WtiaViewModel>();
+        builder.Services.AddSingleton<WtiaPage>();
 
         builder.Services.AddTransient<ApodViewModel>();
         builder.Services.AddTransient<ApodPage>();
