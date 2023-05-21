@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
@@ -24,7 +23,9 @@ namespace ProjectNASA.ViewModel
                 apod = value;
                 if (!FavoriteApods.Contains(apod))
                 {
+                    //TODO: combine both in custom Add method?
                     FavoriteApods.Add(apod);
+                    FavoriteApods.OrderByDate();
                 }
             }
         }
