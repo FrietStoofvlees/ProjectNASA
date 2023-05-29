@@ -15,78 +15,73 @@
     </ContentPage.Behaviors>
     
     <Grid>
-        <RefreshView
-            Command="{Binding GetApodCommand}"
-            IsRefreshing="{Binding IsRefreshing}">
-            
-            <ScrollView
-                HorizontalScrollBarVisibility="Never"
-                VerticalScrollBarVisibility="Never">
-                <VerticalStackLayout
-                    Spacing="10"
-                    Padding="10">
+        <ScrollView
+            HorizontalScrollBarVisibility="Never"
+            VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout
+                Spacing="10"
+                Padding="10">
 
-                    <Label
-                        x:Name="lblPageTitle"
-                        FontAttributes="Bold"
-                        HorizontalOptions="Center"
-                        SemanticProperties.Description="Title of the picture"
-                        Text="{Binding Title}"
-                        FontSize="24"/>
+                <Label
+                    x:Name="lblPageTitle"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Description="Title of the picture"
+                    Text="{Binding Title}"
+                    FontSize="24"/>
 
-                    <Label
-                        x:Name="lblTitle"
-                        HorizontalOptions="Center"
-                        SemanticProperties.Description="Title of the picture"
-                        Text="{Binding Apod.Title}"/>
+                <Label
+                    x:Name="lblTitle"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Description="Title of the picture"
+                    Text="{Binding Apod.Title}"/>
 
-                    <Image
-                        x:Name="imgApod"
-                        Aspect="AspectFill"
-                        Source="{Binding Apod.Url}"
-                        SemanticProperties.Description="A cool astronomy picture!"
-                        HorizontalOptions="Center">
+                <Image
+                    x:Name="imgApod"
+                    Aspect="AspectFill"
+                    Source="{Binding Apod.Url}"
+                    SemanticProperties.Description="A cool astronomy picture!"
+                    HorizontalOptions="Center">
 
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ApodViewModel}}, Path=ImageTappedCommand}"
-                                CommandParameter="{Binding Apod}"/>
-                        </Image.GestureRecognizers>
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ApodViewModel}}, Path=ImageTappedCommand}"
+                            CommandParameter="{Binding Apod}"/>
+                    </Image.GestureRecognizers>
                         
-                    </Image>
+                </Image>
+
+                <Label 
+                    x:Name="lblExplanation"
+                    SemanticProperties.Description="Explanation of the picture."
+                    Text="{Binding Apod.Explanation}"/>
+
+                <Grid ColumnDefinitions="*,*" RowDefinitions="*">
+                    <Label 
+                        x:Name="lblDate"
+                        Grid.Column="0"
+                        SemanticProperties.Description="Date of the picture of the day"
+                        Text="{Binding Apod.Date}"
+                        HorizontalOptions="Start"/>
 
                     <Label 
-                        x:Name="lblExplanation"
-                        SemanticProperties.Description="Explanation of the picture."
-                        Text="{Binding Apod.Explanation}"/>
+                        x:Name="lblCopyright"
+                        Grid.Column="1"
+                        SemanticProperties.Description="Copyright"
+                        Text="{Binding Apod.Copyright}"
+                        HorizontalOptions="End"/>
+                </Grid>
 
-                    <Grid ColumnDefinitions="*,*" RowDefinitions="*">
-                        <Label 
-                            x:Name="lblDate"
-                            Grid.Column="0"
-                            SemanticProperties.Description="Date of the picture of the day"
-                            Text="{Binding Apod.Date}"
-                            HorizontalOptions="Start"/>
-
-                        <Label 
-                            x:Name="lblCopyright"
-                            Grid.Column="1"
-                            SemanticProperties.Description="Copyright"
-                            Text="{Binding Apod.Copyright}"
-                            HorizontalOptions="End"/>
-                    </Grid>
-
-                    <Button
-                        x:Name="btnApod"
-                        Text="Favorite me!"
-                        SemanticProperties.Hint="Favorite this Astronomical Picture of the Day."
-                        Command="{Binding FavoriteApodCommand}"
-                        Style="{StaticResource ButtonStyling}"
-                        IsEnabled="{Binding IsNotBusy}"
-                        IsVisible="{Binding IsNotBusy}" />
-                </VerticalStackLayout>
-            </ScrollView>
-        </RefreshView>
+                <Button
+                    x:Name="btnApod"
+                    Text="Favorite me!"
+                    SemanticProperties.Hint="Favorite this Astronomical Picture of the Day."
+                    Command="{Binding FavoriteApodCommand}"
+                    Style="{StaticResource ButtonStyling}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    IsVisible="{Binding IsNotBusy}" />
+            </VerticalStackLayout>
+        </ScrollView>
 
         <ActivityIndicator
             IsVisible="{Binding IsBusy}"

@@ -15,9 +15,6 @@ namespace ProjectNASA.ViewModel
         [ObservableProperty]
         DateTime selectedDate;
 
-        [ObservableProperty]
-        bool isRefreshing;
-
         public ApodViewModel(IApodService apodService, IConnectivity connectivity)
         {
             this.apodService = apodService;
@@ -36,19 +33,12 @@ namespace ProjectNASA.ViewModel
                 if (connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
                     await Shell.Current.DisplayAlert("No connectivity!", "Check your internet connection", "OK");
+                    await Shell.Current.GoToAsync($"..", true);
                     return;
                 }
 
                 IsBusy = true;
-
-                if (Apod != null)
-                {
-                    if (Apod.Date < DateOnly.FromDateTime(DateTime.Now))
-                        Apod = await apodService.GetAstronomyPictureofGivenDateAsync(SelectedDate);
-                    else return;
-                }
-                else
-                    Apod = await apodService.GetAstronomyPictureofGivenDateAsync(SelectedDate);
+                Apod = await apodService.GetAstronomyPictureofGivenDateAsync(SelectedDate);
             }
             catch (Exception ex)
             {
@@ -57,7 +47,6 @@ namespace ProjectNASA.ViewModel
             finally 
             {
                 IsBusy = false;
-                IsRefreshing = false;
             }
         }
 
@@ -78,11 +67,14 @@ namespace ProjectNASA.ViewModel
         [RelayCommand]
         async Task FavoriteApodAsync()
         {
-            //await Shell.Current.GoToAsync($"..?Apod={Apod}");
             await Shell.Current.GoToAsync("..", true, new Dictionary<string, object>
             {
                 {"Apod", Apod }
             });
+
+            Apod = null;
+
+            SemanticScreenReader.Announce("Picture has been saved to your favorites!");
         }
     }
 }
