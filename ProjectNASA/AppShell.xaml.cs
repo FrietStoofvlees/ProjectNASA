@@ -12,7 +12,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(ImagePage), typeof(ImagePage));
         Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
-        Routing.RegisterRoute(nameof(WtiaPage), typeof(WtiaPage));
+        Routing.RegisterRoute(nameof(WtiaPageMobile), typeof(WtiaPageMobile));
     }
 
     public void SwitchtoTab(TabPages tabPage)

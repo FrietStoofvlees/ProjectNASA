@@ -19,5 +19,6 @@
         public double SolarLat { get; set; }
         public double SolarLon { get; set; }
         public string Units { get; set; }
+        public Coordinates Coordinates { get; set; }
     }
 }
