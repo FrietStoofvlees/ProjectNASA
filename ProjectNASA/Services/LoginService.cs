@@ -13,14 +13,14 @@ namespace ProjectNASA.Services
                 Password = password
             };
 
-            if (Preferences.ContainsKey(nameof(App.User)))
+            if (Preferences.ContainsKey(nameof(AppHelpers.User)))
             {
-                Preferences.Remove(nameof(App.User));
+                Preferences.Remove(nameof(AppHelpers.User));
             }
 
             string userDetails = JsonSerializer.Serialize(user);
-            Preferences.Set(nameof(App.User), userDetails);
-            App.User = user;
+            Preferences.Set(nameof(AppHelpers.User), userDetails);
+            AppHelpers.User = user;
 
             return true;
 
@@ -29,9 +29,9 @@ namespace ProjectNASA.Services
 
         public bool Logout()
         {
-            if (Preferences.ContainsKey(nameof(App.User)))
+            if (Preferences.ContainsKey(nameof(AppHelpers.User)))
             {
-                Preferences.Remove(nameof(App.User));
+                Preferences.Remove(nameof(AppHelpers.User));
             }
 
             return true;
@@ -39,9 +39,9 @@ namespace ProjectNASA.Services
 
         public bool Logout(string username, string password)
         {
-            if (Preferences.ContainsKey(nameof(App.User)))
+            if (Preferences.ContainsKey(nameof(AppHelpers.User)))
             {
-                Preferences.Remove(nameof(App.User));
+                Preferences.Remove(nameof(AppHelpers.User));
             }
 
             return true;

@@ -27,7 +27,7 @@ namespace ProjectNASA.ViewModel
             if (IsLoggedIn)
                 return;
 
-            string user = Preferences.Get(nameof(App.User), "");
+            string user = Preferences.Get(nameof(AppHelpers.User), "");
 
             if (string.IsNullOrWhiteSpace(user))
             {
