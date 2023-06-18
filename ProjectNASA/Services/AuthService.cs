@@ -14,6 +14,12 @@ namespace ProjectNASA.Services
             this.userRepository = userRepository;
         }
 
+        public async Task<bool> IsAuthenticated()
+        {
+            var hasAuth = await SecureStorage.GetAsync("hasAuth");
+            return hasAuth != null;
+        }
+
         public async Task<bool> SignIn(string username, string password)
         {
             User user = new()
@@ -25,44 +31,48 @@ namespace ProjectNASA.Services
             try
             {
                 user = await userRepository.GetUserAsync(user.Username);
-                //await SecureStorage.GetAsync(user);
+
+                string userSerialized = JsonSerializer.Serialize(user);
+                await SecureStorage.SetAsync(nameof(AppHelpers.User), userSerialized);
+                AppHelpers.User = user;
+
+                return true;
             }
-            catch (Exception ex)
+            catch (UserNotFoundException ex)
             {
-                await Toast.Make(ex.Message).Show();
+                await Shell.Current.DisplayAlert("Incorrect Username", $"The username {ex.UserName} doesn't belong to an account.", "Try Again");
                 return false;
             }
-
-            if (Preferences.ContainsKey(nameof(AppHelpers.User)))
-            {
-                Preferences.Remove(nameof(AppHelpers.User));
-            }
-
-            string userDetails = JsonSerializer.Serialize(user);
-            Preferences.Set(nameof(AppHelpers.User), userDetails);
-            AppHelpers.User = user;
-
-            return true;
         }
 
         public bool SignOut()
         {
-            if (Preferences.ContainsKey(nameof(AppHelpers.User)))
-            {
-                Preferences.Remove(nameof(AppHelpers.User));
-            }
-
-            return true;
+            return SecureStorage.Remove(nameof(AppHelpers.User));
         }
 
-        public bool SignOut(string username, string password)
+        public async Task<bool> SignUp(string username, string password)
         {
-            if (Preferences.ContainsKey(nameof(AppHelpers.User)))
+            User user = new()
             {
-                Preferences.Remove(nameof(AppHelpers.User));
-            }
+                Username = username,
+                Password = password
+            };
 
-            return true;
+            try
+            {
+                bool result = await userRepository.SaveUserAsync(user);
+
+                string userSerialized = JsonSerializer.Serialize(user);
+                await SecureStorage.SetAsync(nameof(AppHelpers.User), userSerialized);
+                AppHelpers.User = user;
+
+                return result;
+            }
+            catch (Exception)
+            {
+                await Shell.Current.DisplayAlert("Something went wrong!", $"The account could not be created, try again later please.", "OK");
+                return false;
+            }
         }
     }
 }

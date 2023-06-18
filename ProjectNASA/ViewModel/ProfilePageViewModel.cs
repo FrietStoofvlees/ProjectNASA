@@ -27,20 +27,17 @@ namespace ProjectNASA.ViewModel
         [RelayCommand]
         async Task CheckUserLoginAsync(bool animate)
         {
-            HasAuth = await IsAuthenticated();
+            HasAuth = await authService.IsAuthenticated();
             if (HasAuth)
                 return;
 
-            // use secure storage
-            string user = Preferences.Get(nameof(AppHelpers.User), "");
+            User = AppHelpers.User;
 
-            if (string.IsNullOrWhiteSpace(user))
+            if (User is null)
             {
                 await Shell.Current.GoToAsync(nameof(SignInPage), animate);
                 return;
             }
-
-            User = JsonSerializer.Deserialize<User>(user);
 
             HasAuth = true;
         }
@@ -49,12 +46,6 @@ namespace ProjectNASA.ViewModel
         void EditProfile()
         { 
             IsBusy = true;
-        }
-
-        private static async Task<bool> IsAuthenticated()
-        {
-            var hasAuth = await SecureStorage.GetAsync("hasAuth");
-            return hasAuth != null;
         }
 
         [RelayCommand]
@@ -76,7 +67,7 @@ namespace ProjectNASA.ViewModel
         }
 
         [RelayCommand]
-        async Task Logout()
+        async Task SignOut()
         {
             if (!authService.SignOut())
             {

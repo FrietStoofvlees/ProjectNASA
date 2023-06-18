@@ -14,14 +14,13 @@ namespace ProjectNASA.ViewModel
         string password;
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(HasNoAccount))]
-        bool hasAccount;
+        bool hasAccount = true;
 
         public bool HasNoAccount => !HasAccount;
 
         public SignInPageViewModel(IAuthService authService)
         {
             this.authService = authService;
-            HasAccount = true;
         }
 
         [RelayCommand]
@@ -47,10 +46,10 @@ namespace ProjectNASA.ViewModel
         {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
-                await Toast.Make("Please fill in your username and password").Show();
+                await Toast.Make("Please choose a username and password").Show();
                 return;
             }
-            if (await authService.SignIn(Username, Password))
+            if (await authService.SignUp(Username, Password))
                 await Shell.Current.GoToAsync("..");
         }
     }

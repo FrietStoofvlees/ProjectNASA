@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 
 namespace ProjectNASA.Model
 {
@@ -11,6 +12,9 @@ namespace ProjectNASA.Model
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
+
+        [TextBlob("FavoriteApodsBlobbed")]
         public List<Apod> FavoriteApods { get; set; }
+        public string FavoriteApodsBlobbed { get; set; }
     }
 }

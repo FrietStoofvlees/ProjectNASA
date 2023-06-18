@@ -36,7 +36,7 @@ namespace ProjectNASA.Data
             catch (Exception ex)
             {
                 StatusMessage = $"Failed to remove {result}. Error: {ex.Message}";
-                throw new Exception(StatusMessage, ex);
+                throw;
             }
         }
 
@@ -52,8 +52,8 @@ namespace ProjectNASA.Data
             }
             catch (Exception ex)
             {
-                StatusMessage = $"The user cannot be found. Error: {ex.Message}";
-                throw new UserNotFoundException(StatusMessage, username);
+                StatusMessage = ex.Message;
+                throw new UserNotFoundException(StatusMessage, username, ex);
             }
         }
 
@@ -77,7 +77,7 @@ namespace ProjectNASA.Data
             catch (Exception ex)
             {
                 StatusMessage = $"Failed to save {result} record(s). Error: {ex.Message}";
-                throw new Exception(StatusMessage, ex);
+                throw;
             }
         }
     }

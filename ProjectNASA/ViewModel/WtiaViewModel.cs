@@ -14,7 +14,7 @@ namespace ProjectNASA.ViewModel
         readonly IConnectivity connectivity;
         readonly IMap map;
         readonly IWtiaService wtiaService;
-        bool isApiKeySet = false;
+        bool hasApiKey = false;
         public IDispatcherTimer dispatcherTimer;
 
         public ObservableCollection<Pin> Pins { get; } = new();
@@ -63,7 +63,7 @@ namespace ProjectNASA.ViewModel
             }
         }
 
-        static bool IsMapsSdkApiKeySet()
+        static bool HasMapsSdkApiKey()
         {
             /*
             [Register("getPackageInfo", "(Ljava/lang/String;Landroid/content/pm/PackageManager$PackageInfoFlags;)Landroid/content/pm/PackageInfo;", "GetGetPackageInfo_Ljava_lang_String_Landroid_content_pm_PackageManager_PackageInfoFlags_Handler", ApiSince = 33)]
@@ -92,8 +92,6 @@ namespace ProjectNASA.ViewModel
 
             if (apiKey == "PASTE-YOUR-API-KEY-HERE" || apiKey == "")
                 return false;
-
-            //AppInfo.Current.ShowSettingsUI(); 
 #endif
             return true;
         }
@@ -104,7 +102,7 @@ namespace ProjectNASA.ViewModel
             if (Iss != null)
             {
 #if __MOBILE__
-                if (isApiKeySet)
+                if (hasApiKey)
                 {
                     Pins.Add(new Pin
                     {
@@ -144,8 +142,8 @@ namespace ProjectNASA.ViewModel
         [RelayCommand]
         async Task WtiaPageLoadedAsync()
         {
-            isApiKeySet = IsMapsSdkApiKeySet();
-            if (isApiKeySet)
+            hasApiKey = HasMapsSdkApiKey();
+            if (hasApiKey)
                 return;
 
             await Shell.Current.DisplayAlert("Warning", $"No API Key provided for the Maps SDK for Android. {System.Environment.NewLine} {System.Environment.NewLine} Google Maps features are disabled!", "OK");

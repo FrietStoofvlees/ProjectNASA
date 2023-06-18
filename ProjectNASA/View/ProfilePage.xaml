@@ -107,10 +107,10 @@
                     IsEnabled="{Binding IsBusy}" />
 
                 <Button
-                    x:Name="btnLogout"
-                    Command="{Binding LogoutCommand}"
-                    SemanticProperties.Hint="Logout"
-                    Text="Logout"
+                    x:Name="btnSignOut"
+                    Command="{Binding SignOutCommand}"
+                    SemanticProperties.Hint="SignOut"
+                    Text="Sign Out"
                     VerticalOptions="End"
                     Grid.Column="1"
                     Style="{StaticResource ButtonStyling}"
