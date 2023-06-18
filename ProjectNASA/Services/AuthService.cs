@@ -1,17 +1,37 @@
-﻿using System.Text.Json;
+﻿using CommunityToolkit.Maui.Alerts;
+using ProjectNASA.Data;
+using System.Text.Json;
+using static SQLite.SQLite3;
 
 namespace ProjectNASA.Services
 {
-    public class LoginService : ILoginService
+    public class AuthService : IAuthService
     {
-        public bool Login(string username, string email, string password)
+        IUserRepository userRepository;
+
+        public AuthService(IUserRepository userRepository)
+        {
+            this.userRepository = userRepository;
+        }
+
+        public async Task<bool> SignIn(string username, string password)
         {
             User user = new()
             {
                 Username = username,
-                Email = email,
                 Password = password
             };
+
+            try
+            {
+                user = await userRepository.GetUserAsync(user.Username);
+                //await SecureStorage.GetAsync(user);
+            }
+            catch (Exception ex)
+            {
+                await Toast.Make(ex.Message).Show();
+                return false;
+            }
 
             if (Preferences.ContainsKey(nameof(AppHelpers.User)))
             {
@@ -23,11 +43,9 @@ namespace ProjectNASA.Services
             AppHelpers.User = user;
 
             return true;
-
-            //return await Task.FromResult(user);
         }
 
-        public bool Logout()
+        public bool SignOut()
         {
             if (Preferences.ContainsKey(nameof(AppHelpers.User)))
             {
@@ -37,7 +55,7 @@ namespace ProjectNASA.Services
             return true;
         }
 
-        public bool Logout(string username, string password)
+        public bool SignOut(string username, string password)
         {
             if (Preferences.ContainsKey(nameof(AppHelpers.User)))
             {

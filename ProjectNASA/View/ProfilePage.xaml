@@ -13,7 +13,7 @@
         <toolkit:EventToCommandBehavior 
             EventName="Appearing"
             Command="{Binding CheckUserLoginCommand}" 
-            CommandParameter="{StaticResource False}"/>
+            CommandParameter="{StaticResource False}" />
     </ContentPage.Behaviors>
     
     <Shell.TitleView>
@@ -114,8 +114,8 @@
                     VerticalOptions="End"
                     Grid.Column="1"
                     Style="{StaticResource ButtonStyling}"
-                    IsVisible="{Binding IsLoggedIn}"
-                    IsEnabled="{Binding IsLoggedIn}" />
+                    IsVisible="{Binding HasAuth}"
+                    IsEnabled="{Binding HasAuth}" />
             </Grid>
         </VerticalStackLayout>
     </local:SwipeContainer>

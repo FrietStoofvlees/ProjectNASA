@@ -1,71 +1,91 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ProjectNASA.Data;
 using System.Text.Json;
 
 namespace ProjectNASA.ViewModel
 {
     public partial class ProfilePageViewModel : BaseViewModel
     {
-        readonly ILoginService loginService;
+        readonly IAuthService authService;
+        readonly IUserRepository userRepository;
         
         [ObservableProperty]
         User user;
 
         [ObservableProperty]
-        bool isLoggedIn = false;
+        bool hasAuth = false;
 
-        public ProfilePageViewModel(ILoginService loginService)
+        public ProfilePageViewModel(IAuthService authService, IUserRepository userRepository)
         {
-            this.loginService = loginService;
-            this.loginService.Logout();
+            this.authService = authService;
+            this.userRepository = userRepository;
+            this.authService.SignOut();
         }
 
         [RelayCommand]
         async Task CheckUserLoginAsync(bool animate)
         {
-            if (IsLoggedIn)
+            HasAuth = await IsAuthenticated();
+            if (HasAuth)
                 return;
 
+            // use secure storage
             string user = Preferences.Get(nameof(AppHelpers.User), "");
 
             if (string.IsNullOrWhiteSpace(user))
             {
-                await Shell.Current.GoToAsync(nameof(LoginPage), animate);
+                await Shell.Current.GoToAsync(nameof(SignInPage), animate);
                 return;
             }
 
             User = JsonSerializer.Deserialize<User>(user);
 
-            IsLoggedIn = true;
+            HasAuth = true;
         }
 
         [RelayCommand]
-        private void EditProfile()
+        void EditProfile()
         { 
             IsBusy = true;
         }
 
-        [RelayCommand]
-        private void SaveChanges()
+        private static async Task<bool> IsAuthenticated()
         {
-            if (loginService.Login(User.Username, User.Email, User.Password))
-                Toast.Make("Details saved!").Show();
+            var hasAuth = await SecureStorage.GetAsync("hasAuth");
+            return hasAuth != null;
+        }
+
+        [RelayCommand]
+        async Task SaveChanges()
+        {
+            try
+            {
+                if (await userRepository.SaveUserAsync(User))
+                {
+                    await Toast.Make("Profile saved!").Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                await Toast.Make(ex.Message).Show();
+            }
 
             IsBusy = false;
         }
 
         [RelayCommand]
-        private async Task Logout()
+        async Task Logout()
         {
-            if (!loginService.Logout())
+            if (!authService.SignOut())
             {
-                await Toast.Make("Unable to logout!").Show();
+                await Toast.Make("Unable to Sign Out!").Show();
                 return;
             }
-            IsLoggedIn = false;
+            HasAuth = false;
             User = new User();
-            await Toast.Make("Logout succesfull!").Show();
+            await Toast.Make("Sign Out succesfull!").Show();
             await CheckUserLoginAsync(true);
         }
     }

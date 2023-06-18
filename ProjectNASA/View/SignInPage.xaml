@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectNASA.View.SignInPage"
+             xmlns:viewmodel="clr-namespace:ProjectNASA.ViewModel"
+             xmlns:local="clr-namespace:ProjectNASA.View"
+             xmlns:tap="clr-namespace:Maui.FixesAndWorkarounds;assembly=PureWeen.Maui.FixesAndWorkarounds"
+             x:DataType="viewmodel:SignInPageViewModel"
+             Title="SignInPage"
+             Shell.NavBarIsVisible="False">
+    <local:SwipeContainer>
+        <VerticalStackLayout>
+            <Label
+                Margin="0,75,0,0"
+                HorizontalOptions="Center"
+                Text="Please Sign In to continue to your profile" />
+
+            <Frame 
+                Margin="0,50,0,10"
+                Style="{StaticResource FrameStyling}"
+                WidthRequest="300">
+            
+                <VerticalStackLayout>
+                    <Entry
+                        x:Name="eUsername" 
+                        Text="{Binding Username}"
+                        Placeholder="Username" 
+                        ReturnType="Next"
+                        Style="{StaticResource EntryStyling}">
+                    </Entry>
+
+                    <Entry
+                        x:Name="ePassword"
+                        Margin="0,25,0,0"
+                        Text="{Binding Password}" 
+                        Placeholder="Password" 
+                        ReturnCommand="{Binding SignInCommand}"
+                        IsPassword="True"
+                        Style="{StaticResource EntryStyling}">
+                    </Entry>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Label
+                HorizontalOptions="Center"
+                IsEnabled="{Binding HasAccount}"
+                IsVisible="{Binding HasAccount}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Don't have an account? " />
+                        <Span 
+                            FontAttributes="Bold"
+                            Text="Sign Up here!"
+                            TextColor="LightBlue"
+                            TextDecorations="Underline" />
+                    </FormattedString>
+                </Label.FormattedText>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        Command="{Binding ToggleSignUpCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label
+                HorizontalOptions="Center"
+                IsEnabled="{Binding HasNoAccount}"
+                IsVisible="{Binding HasNoAccount}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span 
+                            Text="Already have an account? "
+                            TextColor="White" />
+                        <Span 
+                            FontAttributes="Bold"
+                            Text="Sign In here!"
+                            TextColor="LightBlue"
+                            TextDecorations="Underline" />
+                    </FormattedString>
+                </Label.FormattedText>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        Command="{Binding ToggleSignUpCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Button
+                Margin="0,50,0,0"
+                x:Name="btnSignIn"
+                Text="Sign In"
+                Command="{Binding SignInCommand}"
+                Style="{StaticResource ButtonStyling}"
+                IsEnabled="{Binding HasAccount}"
+                IsVisible="{Binding HasAccount}" />
+
+            <Button
+                Margin="0,50,0,0"
+                x:Name="btnSignUp"
+                Text="Sign Up"
+                Command="{Binding SignUpCommand}"
+                Style="{StaticResource ButtonStyling}"
+                IsEnabled="{Binding HasNoAccount}"
+                IsVisible="{Binding HasNoAccount}" />
+            
+        </VerticalStackLayout>
+    </local:SwipeContainer>
+</ContentPage>
+    

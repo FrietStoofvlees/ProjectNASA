@@ -79,6 +79,9 @@
 	  <Compile Update="View\ImagePage.xaml.cs">
 	    <DependentUpon>ImagePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\SignInPage.xaml.cs">
+	    <DependentUpon>SignInPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\WtiaPage.xaml.cs">
 	    <DependentUpon>WtiaPage.xaml</DependentUpon>
 	  </Compile>

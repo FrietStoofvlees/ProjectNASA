@@ -23,7 +23,7 @@ namespace ProjectNASA.Services
 
             string formattedDate = dateTime.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
 
-            HttpResponseMessage response = await httpClient.GetAsync("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=" + formattedDate);
+            HttpResponseMessage response = await httpClient.GetAsync($"https://api.nasa.gov/planetary/apod?api_key={Constants.ApodApiKey}&date={formattedDate}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -34,7 +34,7 @@ namespace ProjectNASA.Services
 
         public async Task<Apod> GetAstronomyPictureoftheDayAsync()
         {
-            HttpResponseMessage response = await httpClient.GetAsync("https://api.nasa.gov/planetary/apod?api_key=y2gF3d8nbF9WMcNSgvYkXqCbtqaHgeNBZP9ZQCZ1");
+            HttpResponseMessage response = await httpClient.GetAsync($"https://api.nasa.gov/planetary/apod?api_key={Constants.ApodApiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -65,7 +65,7 @@ namespace ProjectNASA.Services
             {
                 apod = JsonConvert.DeserializeObject<Apod>(content, new JsonSerializerSettings
                 {
-                    MissingMemberHandling = MissingMemberHandling.Error,
+                    MissingMemberHandling = MissingMemberHandling.Ignore,
                 });
             }
             catch (JsonSerializationException ex)

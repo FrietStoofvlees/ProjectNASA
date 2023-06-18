@@ -1,6 +1,5 @@
 ﻿namespace ProjectNASA;
 
-
 public partial class AppShell : Shell
 {
 	public AppShell()
@@ -10,7 +9,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(FavoriteDetailsPage), typeof(FavoriteDetailsPage));
         Routing.RegisterRoute(nameof(GalleryPage), typeof(GalleryPage));
         Routing.RegisterRoute(nameof(ImagePage), typeof(ImagePage));
-        Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+        Routing.RegisterRoute(nameof(SignInPage), typeof(SignInPage));
         Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
         Routing.RegisterRoute(nameof(WtiaPageMobile), typeof(WtiaPageMobile));
     }
