@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectNASA.Data
+namespace ProjectNASA
 {
     public static class Constants
     {
@@ -20,5 +20,7 @@ namespace ProjectNASA.Data
 
         public static string DatabasePath =>
             Path.Combine(FileSystem.AppDataDirectory, DatabaseFilename);
+
+        public const string ApodApiKey = "DEMO_KEY";
     }
 }
