@@ -20,6 +20,8 @@ namespace ProjectNASA.ViewModel
         {
             this.authService = authService;
             this.userRepository = userRepository;
+
+            Title = "Profile Page";
         }
 
         [RelayCommand]
@@ -53,6 +55,12 @@ namespace ProjectNASA.ViewModel
         void EditProfile()
         { 
             IsBusy = true;
+        }
+
+        [RelayCommand]
+        async Task GoToSettingsPageAsync()
+        {
+            await Shell.Current.GoToAsync(nameof(SettingsPage));
         }
 
         [RelayCommand]

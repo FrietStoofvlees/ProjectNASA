@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectNASA.View.SettingsPage"
+             xmlns:viewmodel="clr-namespace:ProjectNASA.ViewModel"
+             x:DataType="viewmodel:SettingsViewModel"
+             Title="{Binding Title}">
+    <ScrollView>
+        <VerticalStackLayout
+            Margin="10"
+            Spacing="10">
+            <Label
+                FontAttributes="Bold"
+                FontSize="Title"
+                HorizontalOptions="Center"
+                Text="{Binding Name}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding ShowEasterEggCommand}"
+                        NumberOfTapsRequired="2"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Frame
+                Style="{StaticResource FrameStyling}">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Subtitle"
+                        Text="Notifications:" />
+                    <Label
+                        Margin="0,10,0,0"
+                        Text="Notifications are currently not in use!" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame
+                Style="{StaticResource FrameStyling}">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Subtitle"
+                        Text="About:" />
+                    <Label
+                        Margin="0,10,0,0"
+                        Text="Explore the universe with ProjectNASA! There is still so much to discover, but beware, navigate the cosmos at your own risk!" />
+                    <Label
+                        Margin="0,25,0,0"
+                        Text="Version:" />
+                    <Label
+                        Text="{Binding Version}" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame
+                Style="{StaticResource FrameStyling}">
+                <Grid>
+                    <Label
+                        FontAttributes="Bold"
+                        Text="Contact" />
+                    <Label
+                        HorizontalOptions="End"
+                        Text="@FrietStoofvlees on GitHub"
+                        TextDecorations="Underline" />
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        Command="{Binding GoToGitHubCommand}"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Frame
+                Style="{StaticResource FrameStyling}">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        Text="EULA" />
+                    <Label
+                        HorizontalOptions="End"
+                        Margin="0,10,0,0"
+                        Text="By using this app, you agree that you will not use the product for purposes prohibited by FrietStoofvlees, including but not limited to the development, design, manufacture or production of nuclear, chemical or biological (orbital) space weapons." />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame
+                Style="{StaticResource FrameStyling}">
+                <Label
+                    FontAttributes="Bold"
+                    Text="Open Settings " />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        Command="{Binding ShowAppSettingsCommand}"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Label
+                HorizontalOptions="End">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            FontAttributes="Italic"
+                            FontSize="Micro"
+                            Text="©"/>
+                        <Span
+                            FontAttributes="Italic"
+                            FontSize="Micro"
+                            Text="{Binding PackageName}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

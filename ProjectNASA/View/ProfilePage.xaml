@@ -8,7 +8,7 @@
              xmlns:tap="clr-namespace:Maui.FixesAndWorkarounds;assembly=PureWeen.Maui.FixesAndWorkarounds"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodel:ProfilePageViewModel"
-             Title="Profile"
+             Title="{Binding Title}"
              Shell.NavBarIsVisible="False">
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior 
@@ -21,17 +21,18 @@
         <VerticalStackLayout>
             <HorizontalStackLayout 
                 HorizontalOptions="End"
-                Padding="10">
+                Padding="10"
+                Margin="0,0,0,50">
                 <Button
                     BackgroundColor="Transparent"
                     Text="Settings"
                     TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
                     Padding="0"
-                    Command="{Binding EditProfileCommand}"
+                    Command="{Binding GoToSettingsPageCommand}"
                     HorizontalOptions="CenterAndExpand"
                     HeightRequest="30" />
         </HorizontalStackLayout>
-        <VerticalStackLayout 
+        <VerticalStackLayout
             Padding="10">
             <Frame
                 Margin="0,0,0,35"
