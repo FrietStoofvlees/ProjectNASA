@@ -5,60 +5,76 @@
              xmlns:viewmodel="clr-namespace:ProjectNASA.ViewModel"
              xmlns:local="clr-namespace:ProjectNASA.View"
              x:Class="ProjectNASA.View.MainPage"
-             x:DataType="viewmodel:WtiaViewModel"
+             x:DataType="viewmodel:MainPageViewModel"
              Shell.NavBarIsVisible="False">
 
     <local:SwipeContainer>
         <Grid>
-            <Label
-                Text="Hello, Space Traveler!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="28"
-                HorizontalOptions="Center" />
 
+            <VerticalStackLayout
+                Padding="10">
+                <Label
+                    HorizontalOptions="Center"
+                    FontAttributes="Bold"
+                    FontSize="Title"
+                    Margin="10" 
+                    SemanticProperties.HeadingLevel="Level1"
+                    Text="Hello Space Traveler!" />
+                <Label
+                    FontSize="Subtitle"
+                    HorizontalOptions="Center"
+                    Text="Discover the Astronomical Picture Of the Day!" />
+
+                <Image
+                    Aspect="AspectFill"
+                    Source="{Binding Apod.Url}"
+                    SemanticProperties.Description="Astronomical Picture Of the Day!"
+                    HorizontalOptions="Center">
+                    <!--<Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ApodViewModel}}, Path=ImageTappedCommand}"
+                            CommandParameter="{Binding Apod}"/>
+                    </Image.GestureRecognizers>-->
+                </Image>
+            </VerticalStackLayout>
             <Grid
                 VerticalOptions="End"
                 RowSpacing="5"
                 Margin="10"
                 ColumnDefinitions="75,*,*"
                 RowDefinitions="25,25,25,25">
-                <Label Grid.Column="0"
-                    Text="Satellite:"/>
+                <Label
+                    Grid.Column="0"
+                    Text="Satellite:" />
                 
                 <Label
                     Grid.Column="1"
-                    Text="{Binding Iss.Name}"/>
+                    Text="{Binding Iss.Name}" />
                 
                 <Label
                     Grid.Column="0"
                     Grid.Row="1"
-                    Text="Latitude:"/>
-                
+                    Text="Latitude:" />
                 <Label
                     Grid.Column="1"
                     Grid.Row="1"
-                    Text="{Binding Iss.Latitude}"/>
-                
+                    Text="{Binding Iss.Latitude}" />
                 <Label
                     Grid.Column="0"
                     Grid.Row="2"
                     Text="Longitude:"/>
-                
                 <Label
                     Grid.Column="1"
                     Grid.Row="2"
-                    Text="{Binding Iss.Longitude}"/>
-
+                    Text="{Binding Iss.Longitude}" />
                 <Label
                     Grid.Column="0"
                     Grid.Row="3"
-                    Text="Country:"/>
-
+                    Text="Country:" />
                 <Label
                     Grid.Column="1"
                     Grid.Row="3"
                     Text="{Binding Iss.Coordinates.CountryCode}"/>
-
                 <Button
                     Grid.Column="2"
                     Grid.Row="0"
@@ -68,7 +84,6 @@
                     Command="{Binding ToggleIssTrackingCommand}"
                     Style="{StaticResource ButtonStyling}" 
                     WidthRequest="125" />
-                
                 <Button
                     Grid.Column="2"
                     Grid.Row="2"

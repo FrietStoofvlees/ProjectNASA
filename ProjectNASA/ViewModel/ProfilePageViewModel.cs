@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ProjectNASA.Data;
-using System.Text.Json;
 
 namespace ProjectNASA.ViewModel
 {
@@ -39,13 +38,25 @@ namespace ProjectNASA.ViewModel
         }
 
         [RelayCommand]
+        async Task DeleteProfileAsync()
+        {
+            bool answer = await Shell.Current.DisplayAlert("Delete Profile?", "Do you really want to delete your profile? This action cannot be undone.", "Yes! Delete", "Cancel");
+
+            if (answer)
+            {
+                await authService.SignOut(answer);
+                await Toast.Make("Your account has been deleted!").Show();
+            }
+        }
+
+        [RelayCommand]
         void EditProfile()
         { 
             IsBusy = true;
         }
 
         [RelayCommand]
-        async Task SaveChanges()
+        async Task SaveChangesAsync()
         {
             try
             {
@@ -63,20 +74,22 @@ namespace ProjectNASA.ViewModel
         }
 
         [RelayCommand]
-        async Task SignOut()
+        async Task SignOutAsync()
         {
-            if (authService.SignOut())
+            HasAuth = !await authService.SignOut(false);
+
+            if (HasAuth)
             {
-                await Toast.Make("Sign Out succesfull!").Show();
-
-                HasAuth = false;
-                User = null;
-
-                await CheckAuthenticationAsync(true);
+                await Toast.Make("Unable to Sign Out!").Show();
                 return;
             }
-            
-            await Toast.Make("Unable to Sign Out!").Show();
+
+            await Toast.Make("Sign Out succesfull!").Show();
+
+            HasAuth = false;
+            User = null;
+
+            await CheckAuthenticationAsync(true);
         }
     }
 }

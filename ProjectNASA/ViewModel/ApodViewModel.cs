@@ -38,7 +38,7 @@ namespace ProjectNASA.ViewModel
                 }
 
                 IsBusy = true;
-                Apod = await apodService.GetAstronomyPictureofGivenDateAsync(SelectedDate);
+                Apod = await apodService.GetAstronomyPictureOfGivenDateAsync(SelectedDate);
             }
             catch (Exception ex)
             {

@@ -82,13 +82,14 @@
             </Frame>
 
             <Grid
-                ColumnDefinitions="*,*">
+                ColumnDefinitions="*,*"
+                RowDefinitions="*,Auto"
+                RowSpacing="15">
                 <Button
                     x:Name="btnEditProfile"
                     Command="{Binding EditProfileCommand}"
                     SemanticProperties.Hint="Edit profile"
                     Text="Edit Profile"
-                    VerticalOptions="End"
                     Grid.Column="0"
                     Style="{StaticResource ButtonStyling}"
                     IsVisible="{Binding IsNotBusy}"
@@ -99,7 +100,6 @@
                     Command="{Binding SaveChangesCommand}"
                     SemanticProperties.Hint="Save changes made"
                     Text="Save"
-                    VerticalOptions="End"
                     Grid.Column="0"
                     Style="{StaticResource ButtonStyling}"
                     IsVisible="{Binding IsBusy}"
@@ -110,11 +110,21 @@
                     Command="{Binding SignOutCommand}"
                     SemanticProperties.Hint="SignOut"
                     Text="Sign Out"
-                    VerticalOptions="End"
                     Grid.Column="1"
                     Style="{StaticResource ButtonStyling}"
                     IsVisible="{Binding HasAuth}"
                     IsEnabled="{Binding HasAuth}" />
+
+                <Button
+                    x:Name="btnDeleteAccount"
+                    Command="{Binding DeleteProfileCommand}"
+                    SemanticProperties.Hint="Delete Profile"
+                    Text="Delete Profile"
+                    Grid.Column="1"
+                    Style="{StaticResource ButtonStyling}"
+                    WidthRequest="125"
+                    IsVisible="{Binding IsBusy}"
+                    IsEnabled="{Binding IsBusy}" />
                 </Grid>
             </VerticalStackLayout>
         </VerticalStackLayout>

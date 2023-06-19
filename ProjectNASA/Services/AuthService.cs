@@ -49,8 +49,11 @@ namespace ProjectNASA.Services
             }
         }
 
-        public bool SignOut()
+        public async Task<bool> SignOut(bool deleteProfile)
         {
+            if (deleteProfile)
+                await userRepository.DeleteUserAsync(AppHelpers.User);
+
             AppHelpers.User = null;
             return SecureStorage.Default.Remove("auth");
         }

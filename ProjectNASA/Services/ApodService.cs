@@ -14,11 +14,11 @@ namespace ProjectNASA.Services
             httpClient = new();
         }
 
-        public async Task<Apod> GetAstronomyPictureofGivenDateAsync(DateTime dateTime)
+        public async Task<Apod> GetAstronomyPictureOfGivenDateAsync(DateTime dateTime)
         {
             if (dateTime == DateTime.Today)
             {
-                return await GetAstronomyPictureoftheDayAsync();
+                return await GetAstronomyPictureOftheDayAsync();
             }
 
             string formattedDate = dateTime.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
@@ -32,7 +32,7 @@ namespace ProjectNASA.Services
             return null;
         }
 
-        public async Task<Apod> GetAstronomyPictureoftheDayAsync()
+        public async Task<Apod> GetAstronomyPictureOftheDayAsync()
         {
             HttpResponseMessage response = await httpClient.GetAsync($"https://api.nasa.gov/planetary/apod?api_key={Constants.ApodApiKey}");
 

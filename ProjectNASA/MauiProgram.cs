@@ -40,6 +40,7 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<GalleryPageViewModel>();
         builder.Services.AddSingleton<GalleryPage>();
+        builder.Services.AddSingleton<MainPageViewModel>();
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<ProfilePageViewModel>();
         builder.Services.AddSingleton<ProfilePage>();
