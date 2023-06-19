@@ -70,6 +70,8 @@ namespace ProjectNASA.ViewModel
 #elif WINDOWS
                 await Launcher.OpenAsync(Iss.Coordinates.MapUrl);
 #endif
+            } else {
+                await Toast.Make("Start tracking the ISS first!").Show();
             }
         }
 

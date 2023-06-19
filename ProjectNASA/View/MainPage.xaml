@@ -37,6 +37,18 @@
                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToApodPageCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
+                <VerticalStackLayout 
+                    Spacing="10"
+                    Margin="0,10,0,0">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Subtitle"
+                        Text="Where is the International Space Station?" />
+                    <Label 
+                        Text="The International Space Station (ISS) is the largest modular space station in low Earth orbit. The project involves five space agencies: the United States' NASA, Russia's Roscosmos, Japan's JAXA, Europe's ESA, and Canada's CSA." />
+                    <Label 
+                        Text="To follow its journey, you can click on the buttons below!" />
+                </VerticalStackLayout>
             </VerticalStackLayout>
             <Grid
                 VerticalOptions="End"
