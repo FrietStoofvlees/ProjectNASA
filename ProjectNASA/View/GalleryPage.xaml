@@ -9,6 +9,12 @@
              x:DataType="viewmodel:GalleryPageViewModel"
              Title="GalleryPage"
              Shell.NavBarIsVisible="False">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior 
+            EventName="Appearing"
+            Command="{Binding FillGalleryCommand}" />
+    </ContentPage.Behaviors>
+    
     <local:SwipeContainer>
         <VerticalStackLayout>
             <Label
@@ -16,7 +22,7 @@
                 FontAttributes="Bold"
                 FontSize="Title"
                 HorizontalOptions="Center"
-                Margin="10" />
+                Margin="20" />
 
             <CollectionView 
                 ItemsSource="{Binding FavoriteApods}"

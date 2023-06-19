@@ -38,8 +38,14 @@ namespace ProjectNASA.ViewModel
             this.authService = authService;
             this.userRepository = userRepository;
             SelectedDate = DateTime.Today;
-            if (AppHelpers.User.FavoriteApods is not null) 
+        }
+
+        [RelayCommand]
+        async Task FillGalleryAsync()
+        {
+            if (await authService.HasAuthenticationAsync())
             {
+                FavoriteApods.Clear();
                 foreach (Apod favApod in AppHelpers.User.FavoriteApods)
                 {
                     FavoriteApods.Add(favApod);
