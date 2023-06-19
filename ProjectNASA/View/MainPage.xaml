@@ -7,7 +7,6 @@
              x:Class="ProjectNASA.View.MainPage"
              x:DataType="viewmodel:MainPageViewModel"
              Shell.NavBarIsVisible="False">
-
     <local:SwipeContainer>
         <Grid>
             <VerticalStackLayout
@@ -29,10 +28,10 @@
                     Text="Discover the Astronomical Picture Of the Day!" />
                 <Image
                     Aspect="AspectFill"
+                    MaximumHeightRequest="300"
                     Source="{Binding Apod.Url}"
                     SemanticProperties.Description="Astronomical Picture Of the Day!"
-                    SemanticProperties.HeadingLevel="Level3"
-                    HorizontalOptions="Center">
+                    SemanticProperties.HeadingLevel="Level3">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToApodPageCommand}" />

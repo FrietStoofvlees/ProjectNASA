@@ -6,10 +6,20 @@
              xmlns:local="clr-namespace:ProjectNASA.View"
              xmlns:tap="clr-namespace:Maui.FixesAndWorkarounds;assembly=PureWeen.Maui.FixesAndWorkarounds"
              x:DataType="viewmodel:SignInPageViewModel"
-             Title="SignInPage"
+             Title="{Binding Title}"
+             SemanticProperties.Description="{Binding Title}"
              Shell.NavBarIsVisible="False">
     <local:SwipeContainer>
         <VerticalStackLayout>
+            <Label
+                HorizontalOptions="Center"
+                FontAttributes="Bold"
+                FontSize="Title"
+                Margin="0,20,0,0" 
+                SemanticProperties.Description="{Binding Title}"
+                SemanticProperties.HeadingLevel="Level1"
+                Text="{Binding Title}" />
+
             <Label
                 Margin="0,75,0,0"
                 HorizontalOptions="Center"

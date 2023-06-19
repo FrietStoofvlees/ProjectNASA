@@ -4,8 +4,7 @@
              x:Class="ProjectNASA.View.FavoriteDetailsPage"
              xmlns:viewmodel="clr-namespace:ProjectNASA.ViewModel"
              x:DataType="viewmodel:FavoriteDetailsViewModel"
-             Title="{Binding Apod.Title}"
-             Shell.BackgroundColor="Black">
+             Title="{Binding Apod.Title}">
     <ScrollView
         HorizontalScrollBarVisibility="Never"
         VerticalScrollBarVisibility="Never">

@@ -7,7 +7,8 @@
              xmlns:local="clr-namespace:ProjectNASA.View"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodel:GalleryPageViewModel"
-             Title="GalleryPage"
+             Title="{Binding Title}"
+             SemanticProperties.Description="{Binding Title}"
              Shell.NavBarIsVisible="False">
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior 
@@ -29,14 +30,23 @@
                 SelectionMode="None"
                 HeightRequest="400">
                 <CollectionView.EmptyView>
-                    <StackLayout Padding="100">
-                        <Image
+                    <!--https://github.com/dotnet/maui/pull/11763, Fixed in .NET 8-->
+                    <Frame
+                        Margin="50"
+                        Style="{StaticResource FrameStyling}">
+                        <StackLayout 
                             HorizontalOptions="Center"
-                            Source="gallery_icon.png"
-                            HeightRequest="96"
-                            WidthRequest="96"
-                            VerticalOptions="Center" />
-                    </StackLayout>
+                            VerticalOptions="Center"
+                            Margin="25">
+                            <Image
+                                Source="{AppThemeBinding Dark=edvard_munch_white.png, Light=edvard_munch.png}"
+                                HeightRequest="72"
+                                WidthRequest="72" />
+                            <Label
+                                FontAttributes="Bold"
+                                Text="Nothing to see here, find some cool images using the calender below!"/>
+                        </StackLayout>
+                    </Frame>
                 </CollectionView.EmptyView>
 
                 <CollectionView.ItemTemplate>

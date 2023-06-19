@@ -38,6 +38,8 @@ namespace ProjectNASA.ViewModel
             this.authService = authService;
             this.userRepository = userRepository;
             SelectedDate = DateTime.Today;
+
+            Title = "Gallery Page";
         }
 
         [RelayCommand]

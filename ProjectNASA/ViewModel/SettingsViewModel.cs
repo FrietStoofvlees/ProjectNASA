@@ -16,10 +16,11 @@ namespace ProjectNASA.ViewModel
         public SettingsViewModel(IConnectivity connectivity)
         {
             this.connectivity = connectivity;
-            Title = "Settings";
             Name = AppInfo.Name;
             PackageName = AppInfo.PackageName;
             Version = AppInfo.VersionString;
+
+            Title = "Settings";
         }
 
         [RelayCommand]

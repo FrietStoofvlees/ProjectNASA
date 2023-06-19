@@ -21,6 +21,8 @@ namespace ProjectNASA.ViewModel
         public SignInPageViewModel(IAuthService authService)
         {
             this.authService = authService;
+
+            Title = "Sign In/Up Page";
         }
 
         [RelayCommand]

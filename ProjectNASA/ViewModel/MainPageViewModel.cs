@@ -62,17 +62,6 @@ namespace ProjectNASA.ViewModel
             if (Iss is not null)
             {
 #if __MOBILE__
-                //if (hasApiKey)
-                //{
-                //    Pins.Add(new Pin
-                //    {
-                //        Address = Iss.Coordinates.TimezoneId,
-                //        Description = "Real-time ISS location!",
-                //        Location = new Location(Iss.Latitude, Iss.Longitude)
-                //    });
-                //    return;
-                //}
-
                 await map.OpenAsync(Iss.Latitude, Iss.Longitude, new MapLaunchOptions
                 {
                     Name = "Real-time ISS location!",
@@ -89,8 +78,6 @@ namespace ProjectNASA.ViewModel
         {
             try
             {
-                if (IsBusy) return;
-
                 if (connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
                     await Shell.Current.DisplayAlert("No connectivity!", "Check your internet connection", "OK");
@@ -98,6 +85,12 @@ namespace ProjectNASA.ViewModel
                 }
 
                 Iss = await wtiaService.GetIssCurrentLocationAsync();
+
+                if (Iss.Coordinates.CountryCode == "??")
+                {
+                    Iss.Coordinates.CountryCode = "Over the ocean";
+                    OnPropertyChanged(nameof(Iss));
+                }
             }
             catch (Exception ex)
             {
@@ -115,10 +108,8 @@ namespace ProjectNASA.ViewModel
                 return;
             }
 
-            IsBusy = true;
             await TrackIssAsync();
             dispatcherTimer.Start();
-            IsBusy = false;
             await Toast.Make("Tracking the location of the ISS!").Show();
         }
     }

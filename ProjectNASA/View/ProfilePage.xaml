@@ -21,8 +21,7 @@
         <VerticalStackLayout>
             <HorizontalStackLayout 
                 HorizontalOptions="End"
-                Padding="10"
-                Margin="0,0,0,50">
+                Padding="10">
                 <Button
                     BackgroundColor="Transparent"
                     Text="Settings"
@@ -34,6 +33,14 @@
         </HorizontalStackLayout>
         <VerticalStackLayout
             Padding="10">
+            <Label
+                HorizontalOptions="Center"
+                FontAttributes="Bold"
+                FontSize="Title"
+                Margin="0,-40,0,50" 
+                SemanticProperties.Description="{Binding Title}"
+                SemanticProperties.HeadingLevel="Level1"
+                Text="{Binding Title}" />
             <Frame
                 Margin="0,0,0,35"
                 Style="{StaticResource FrameStyling}"
