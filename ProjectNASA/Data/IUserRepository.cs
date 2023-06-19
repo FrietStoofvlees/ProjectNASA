@@ -2,8 +2,8 @@
 {
     public interface IUserRepository
     {
-        Task DeleteUserAsync(User user);
-        Task<User> GetUserAsync(string username);
-        Task<bool> SaveUserAsync(User user);
+        void DeleteUser(User user);
+        User GetUser(string username);
+        void SaveUser(User user);
     }
 }

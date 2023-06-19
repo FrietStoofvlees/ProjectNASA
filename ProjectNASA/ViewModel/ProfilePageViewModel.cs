@@ -44,7 +44,7 @@ namespace ProjectNASA.ViewModel
 
             if (answer)
             {
-                await authService.SignOut(answer);
+                authService.SignOut(answer);
                 await Toast.Make("Your account has been deleted!").Show();
             }
         }
@@ -60,10 +60,8 @@ namespace ProjectNASA.ViewModel
         {
             try
             {
-                if (await userRepository.SaveUserAsync(User))
-                {
-                    await Toast.Make("Profile saved!").Show();
-                }
+                userRepository.SaveUser(User);
+                await Toast.Make("Profile saved!").Show();
             }
             catch (Exception ex)
             {
@@ -76,7 +74,7 @@ namespace ProjectNASA.ViewModel
         [RelayCommand]
         async Task SignOutAsync()
         {
-            HasAuth = !await authService.SignOut(false);
+            HasAuth = !authService.SignOut(false);
 
             if (HasAuth)
             {

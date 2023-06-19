@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Extensions;
 
 namespace ProjectNASA.Data
 {
@@ -6,47 +7,41 @@ namespace ProjectNASA.Data
     {
         public string StatusMessage { get; set; }
 
-        SQLiteAsyncConnection database;
+        SQLiteConnection database;
 
-        async Task Init()
+        void Init()
         {
             if (database is not null)
-            {
                 return;
-            }
 
-            database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-            CreateTableResult result = await database.CreateTableAsync<User>();
+            database = new SQLiteConnection(Constants.DatabasePath, Constants.Flags);
+            CreateTableResult result = database.CreateTable<User>();
             StatusMessage = $"Table was {result}.";
         }
 
-        public async Task DeleteUserAsync(User user)
+        public void DeleteUser(User user)
         {
-            int result = 0;
-
             try
             {
-                await Init();
+                Init();
 
-                result = await database.DeleteAsync(user);
+                int result = database.Delete(user);
 
                 StatusMessage = $"{result} record(s) removed! (Name: {user.Username})";
-
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Failed to remove {result}. Error: {ex.Message}";
+                StatusMessage = $"Failed to remove user: {user.Username}. Error: {ex.Message}";
                 throw;
             }
         }
 
-        public async Task<User> GetUserAsync(string username)
+        public User GetUser(string username)
         {
             try
             {
-                await Init();
-
-                User user = await database.GetAsync<User>(user => user.Username == username);
+                Init();
+                User user = database.GetAllWithChildren<User>(user => user.Username == username).FirstOrDefault();
 
                 return user;
             }
@@ -57,26 +52,17 @@ namespace ProjectNASA.Data
             }
         }
 
-        public async Task<bool> SaveUserAsync(User user)
+        public void SaveUser(User user)
         {
-            int result = 0;
-
             try
             {
-                await Init();
-
-                if (user.Id != 0)
-                    result = await database.UpdateAsync(user);
-                else
-                    result = await database.InsertAsync(user);
-
-                StatusMessage = $"{result} record(s) saved (Name: {user.Username})";
-
-                return result != 0;
+                Init();
+                database.UpdateWithChildren(user);
+                StatusMessage = $"User: {user.Username} saved.";
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Failed to save {result} record(s). Error: {ex.Message}";
+                StatusMessage = $"Failed to save user: {user.Username}. Error: {ex.Message}";
                 throw;
             }
         }

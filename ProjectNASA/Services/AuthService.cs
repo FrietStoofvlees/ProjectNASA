@@ -10,6 +10,11 @@ namespace ProjectNASA.Services
         public AuthService(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
+
+            Task.Run(async () =>
+            {
+                await HasAuthenticationAsync();
+            });
         }
 
         public async Task<bool> HasAuthenticationAsync()
@@ -20,7 +25,7 @@ namespace ProjectNASA.Services
             string hasAuth = await SecureStorage.Default.GetAsync("auth");
             if (!string.IsNullOrEmpty(hasAuth))
             {
-                AppHelpers.User = await userRepository.GetUserAsync(hasAuth);
+                AppHelpers.User = userRepository.GetUser(hasAuth);
                 return true;
             }
             return false;
@@ -28,15 +33,10 @@ namespace ProjectNASA.Services
 
         public async Task<bool> SignInAsync(string username, string password)
         {
-            User user = new()
-            {
-                Username = username,
-                Password = password
-            };
-
             try
             {
-                user = await userRepository.GetUserAsync(user.Username);
+                //Password check
+                User user = userRepository.GetUser(username);
                 await SecureStorage.Default.SetAsync("auth", user.Username);
                 AppHelpers.User = user;
 
@@ -49,10 +49,10 @@ namespace ProjectNASA.Services
             }
         }
 
-        public async Task<bool> SignOut(bool deleteProfile)
+        public bool SignOut(bool deleteProfile)
         {
             if (deleteProfile)
-                await userRepository.DeleteUserAsync(AppHelpers.User);
+                userRepository.DeleteUser(AppHelpers.User);
 
             AppHelpers.User = null;
             return SecureStorage.Default.Remove("auth");
@@ -68,11 +68,11 @@ namespace ProjectNASA.Services
 
             try
             {
-                bool result = await userRepository.SaveUserAsync(user);
+                userRepository.SaveUser(user);
                 await SecureStorage.Default.SetAsync("auth", user.Username);
                 AppHelpers.User = user;
 
-                return result;
+                return true;
             }
             catch (Exception)
             {

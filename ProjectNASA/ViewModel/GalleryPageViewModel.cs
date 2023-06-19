@@ -1,5 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ProjectNASA.Data;
 using System.Collections.ObjectModel;
 
 namespace ProjectNASA.ViewModel
@@ -7,7 +9,8 @@ namespace ProjectNASA.ViewModel
     [QueryProperty(nameof(Apod), "Apod")]
     public partial class GalleryPageViewModel : BaseViewModel
     {
-        readonly IApodService apodService;
+        readonly IAuthService authService;
+        readonly IUserRepository userRepository;
 
         [ObservableProperty]
         DateTime selectedDate;
@@ -23,17 +26,25 @@ namespace ProjectNASA.ViewModel
                 apod = value;
                 if (!FavoriteApods.Contains(apod))
                 {
-                    //TODO: combine both in custom Add method?
                     FavoriteApods.Add(apod);
                     FavoriteApods.OrderByDate();
+                    Task.Run(SaveFavoriteApods);
                 }
             }
         }
 
-        public GalleryPageViewModel(IApodService apodService)
+        public GalleryPageViewModel(IAuthService authService, IUserRepository userRepository)
         {
-            this.apodService = apodService;
+            this.authService = authService;
+            this.userRepository = userRepository;
             SelectedDate = DateTime.Today;
+            if (AppHelpers.User.FavoriteApods is not null) 
+            {
+                foreach (Apod favApod in AppHelpers.User.FavoriteApods)
+                {
+                    FavoriteApods.Add(favApod);
+                }
+            }
         }
 
         [RelayCommand]
@@ -58,12 +69,29 @@ namespace ProjectNASA.ViewModel
         }
 
         [RelayCommand]
-        void RemoveApod(Apod apod)
+        async Task RemoveApodAsync(Apod apod)
         {
             if (apod == null)
                 return;
 
             FavoriteApods.Remove(apod);
+            await SaveFavoriteApods();
+        }
+
+        async Task SaveFavoriteApods()
+        {
+            try
+            {
+                if (await authService.HasAuthenticationAsync())
+                {
+                    AppHelpers.User.FavoriteApods = FavoriteApods.ToList();
+                    userRepository.SaveUser(AppHelpers.User);
+                }
+            }
+            catch (Exception)
+            {
+                await Toast.Make("Your profile could not be updated in the database!").Show();
+            }
         }
     }
 }
