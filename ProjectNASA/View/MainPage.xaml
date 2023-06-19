@@ -10,7 +10,6 @@
 
     <local:SwipeContainer>
         <Grid>
-
             <VerticalStackLayout
                 Padding="10">
                 <Label
@@ -18,23 +17,26 @@
                     FontAttributes="Bold"
                     FontSize="Title"
                     Margin="10" 
+                    SemanticProperties.Description="Hello Space Traveler!"
                     SemanticProperties.HeadingLevel="Level1"
                     Text="Hello Space Traveler!" />
                 <Label
                     FontSize="Subtitle"
                     HorizontalOptions="Center"
+                    Margin="0,0,0,10"
+                    SemanticProperties.Description="Discover the Astronomical Picture Of the Day!"
+                    SemanticProperties.HeadingLevel="Level2"
                     Text="Discover the Astronomical Picture Of the Day!" />
-
                 <Image
                     Aspect="AspectFill"
                     Source="{Binding Apod.Url}"
                     SemanticProperties.Description="Astronomical Picture Of the Day!"
+                    SemanticProperties.HeadingLevel="Level3"
                     HorizontalOptions="Center">
-                    <!--<Image.GestureRecognizers>
+                    <Image.GestureRecognizers>
                         <TapGestureRecognizer
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ApodViewModel}}, Path=ImageTappedCommand}"
-                            CommandParameter="{Binding Apod}"/>
-                    </Image.GestureRecognizers>-->
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToApodPageCommand}" />
+                    </Image.GestureRecognizers>
                 </Image>
             </VerticalStackLayout>
             <Grid
@@ -93,6 +95,11 @@
                     Style="{StaticResource ButtonStyling}" 
                     WidthRequest="125" />
             </Grid>
+            <ActivityIndicator 
+                IsVisible="{Binding IsBusy}"
+                IsRunning="{Binding IsBusy}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
         </Grid>
     </local:SwipeContainer>
 </ContentPage>

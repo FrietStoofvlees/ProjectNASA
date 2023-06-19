@@ -1,12 +1,6 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Dispatching;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjectNASA.ViewModel
 {
@@ -35,8 +29,10 @@ namespace ProjectNASA.ViewModel
 
             Task.Run(async() => 
             {
+                IsBusy = true;
                 Apod = await this.apodService.GetAstronomyPictureOftheDayAsync();
-            
+                IsBusy = false;
+
             });
 
             dispatcherTimer = Application.Current.Dispatcher.CreateTimer();
@@ -50,6 +46,15 @@ namespace ProjectNASA.ViewModel
 #if ANDROID
         public void Github14471Hack(string propertyName) => OnPropertyChanged(propertyName);
 #endif
+
+        [RelayCommand]
+        async Task GoToApodPageAsync()
+        {
+            await Shell.Current.GoToAsync(nameof(FavoriteDetailsPage), true, new Dictionary<string, object>()
+            {
+                { "Apod", Apod }
+            });
+        }
 
         [RelayCommand]
         async Task OpenMapsAsync()
@@ -92,17 +97,11 @@ namespace ProjectNASA.ViewModel
                     return;
                 }
 
-                IsBusy = true;
-
                 Iss = await wtiaService.GetIssCurrentLocationAsync();
             }
             catch (Exception ex)
             {
                 await Shell.Current.DisplayAlert("The following error occured:", ex.Message, "OK");
-            }
-            finally
-            {
-                IsBusy = false;
             }
         }
 
@@ -116,8 +115,10 @@ namespace ProjectNASA.ViewModel
                 return;
             }
 
+            IsBusy = true;
             await TrackIssAsync();
             dispatcherTimer.Start();
+            IsBusy = false;
             await Toast.Make("Tracking the location of the ISS!").Show();
         }
     }

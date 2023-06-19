@@ -14,6 +14,8 @@ namespace ProjectNASA.Services
             httpClient = new();
         }
 
+        Apod apod;
+
         public async Task<Apod> GetAstronomyPictureOfGivenDateAsync(DateTime dateTime)
         {
             if (dateTime == DateTime.Today)
@@ -34,6 +36,9 @@ namespace ProjectNASA.Services
 
         public async Task<Apod> GetAstronomyPictureOftheDayAsync()
         {
+            if (apod is not null)
+                return apod;
+
             HttpResponseMessage response = await httpClient.GetAsync($"https://api.nasa.gov/planetary/apod?api_key={Constants.ApodApiKey}");
 
             if (response.IsSuccessStatusCode)
@@ -47,7 +52,8 @@ namespace ProjectNASA.Services
                 //    apod.Hdurl = apod.Url;
                 //}
 
-                return await ConvertJsonToApodAsync(response);
+                apod = await ConvertJsonToApodAsync(response);
+                return apod;
             }
 
             await Shell.Current.DisplayAlert($"HTTP response was not succesfull:", response.ReasonPhrase, "OK");

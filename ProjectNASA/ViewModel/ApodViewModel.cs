@@ -20,7 +20,7 @@ namespace ProjectNASA.ViewModel
             this.apodService = apodService;
             this.connectivity = connectivity;
 
-            Title = "Astronomy Picture of the Day!";
+            Title = "Astronomy Picture Of the Day!";
         }
 
         [RelayCommand]
