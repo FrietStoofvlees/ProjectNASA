@@ -21,25 +21,21 @@ namespace ProjectNASA.ViewModel
         {
             this.authService = authService;
             this.userRepository = userRepository;
-            this.authService.SignOut();
         }
 
         [RelayCommand]
-        async Task CheckUserLoginAsync(bool animate)
+        async Task CheckAuthenticationAsync(bool animate)
         {
-            HasAuth = await authService.IsAuthenticated();
             if (HasAuth)
                 return;
 
-            User = AppHelpers.User;
-
-            if (User is null)
+            if (await authService.HasAuthenticationAsync())
             {
+                User = AppHelpers.User;
+                HasAuth = true;
+            } else {
                 await Shell.Current.GoToAsync(nameof(SignInPage), animate);
-                return;
             }
-
-            HasAuth = true;
         }
 
         [RelayCommand]
@@ -69,15 +65,18 @@ namespace ProjectNASA.ViewModel
         [RelayCommand]
         async Task SignOut()
         {
-            if (!authService.SignOut())
+            if (authService.SignOut())
             {
-                await Toast.Make("Unable to Sign Out!").Show();
+                await Toast.Make("Sign Out succesfull!").Show();
+
+                HasAuth = false;
+                User = null;
+
+                await CheckAuthenticationAsync(true);
                 return;
             }
-            HasAuth = false;
-            User = new User();
-            await Toast.Make("Sign Out succesfull!").Show();
-            await CheckUserLoginAsync(true);
+            
+            await Toast.Make("Unable to Sign Out!").Show();
         }
     }
 }

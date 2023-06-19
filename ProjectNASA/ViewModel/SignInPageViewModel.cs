@@ -13,10 +13,10 @@ namespace ProjectNASA.ViewModel
         [ObservableProperty]
         string password;
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(HasNoAccount))]
-        bool hasAccount = true;
+        [NotifyPropertyChangedFor(nameof(HasNoAuth))]
+        bool hasAuth = true;
 
-        public bool HasNoAccount => !HasAccount;
+        public bool HasNoAuth => !HasAuth;
 
         public SignInPageViewModel(IAuthService authService)
         {
@@ -26,7 +26,7 @@ namespace ProjectNASA.ViewModel
         [RelayCommand]
         public void ToggleSignUp()
         {
-            HasAccount = !HasAccount;
+            HasAuth = !HasAuth;
         }
         
         [RelayCommand]
@@ -37,7 +37,7 @@ namespace ProjectNASA.ViewModel
                 await Toast.Make("Please fill in your username and password").Show();
                 return;
             } 
-            if (await authService.SignIn(Username, Password))
+            if (await authService.SignInAsync(Username, Password))
                 await Shell.Current.GoToAsync("..");
         }
 
@@ -49,7 +49,7 @@ namespace ProjectNASA.ViewModel
                 await Toast.Make("Please choose a username and password").Show();
                 return;
             }
-            if (await authService.SignUp(Username, Password))
+            if (await authService.SignUpAsync(Username, Password))
                 await Shell.Current.GoToAsync("..");
         }
     }

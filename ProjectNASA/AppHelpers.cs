@@ -1,7 +1,7 @@
-﻿using Microsoft.Maui.Platform;
-using ProjectNASA;
-
-internal static class AppHelpers
+﻿namespace ProjectNASA
 {
-    public static User User;
+    internal static class AppHelpers
+    {
+        public static User User;
+    }
 }

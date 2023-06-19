@@ -13,7 +13,7 @@
             <Label
                 Margin="0,75,0,0"
                 HorizontalOptions="Center"
-                Text="Please Sign In to continue to your profile" />
+                Text="Please Sign In/Up to continue to your profile" />
 
             <Frame 
                 Margin="0,50,0,10"
@@ -43,8 +43,8 @@
 
             <Label
                 HorizontalOptions="Center"
-                IsEnabled="{Binding HasAccount}"
-                IsVisible="{Binding HasAccount}">
+                IsEnabled="{Binding HasAuth}"
+                IsVisible="{Binding HasAuth}">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Don't have an account? " />
@@ -63,8 +63,8 @@
 
             <Label
                 HorizontalOptions="Center"
-                IsEnabled="{Binding HasNoAccount}"
-                IsVisible="{Binding HasNoAccount}">
+                IsEnabled="{Binding HasNoAuth}"
+                IsVisible="{Binding HasNoAuth}">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span 
@@ -89,8 +89,8 @@
                 Text="Sign In"
                 Command="{Binding SignInCommand}"
                 Style="{StaticResource ButtonStyling}"
-                IsEnabled="{Binding HasAccount}"
-                IsVisible="{Binding HasAccount}" />
+                IsEnabled="{Binding HasAuth}"
+                IsVisible="{Binding HasAuth}" />
 
             <Button
                 Margin="0,50,0,0"
@@ -98,8 +98,8 @@
                 Text="Sign Up"
                 Command="{Binding SignUpCommand}"
                 Style="{StaticResource ButtonStyling}"
-                IsEnabled="{Binding HasNoAccount}"
-                IsVisible="{Binding HasNoAccount}" />
+                IsEnabled="{Binding HasNoAuth}"
+                IsVisible="{Binding HasNoAuth}" />
             
         </VerticalStackLayout>
     </local:SwipeContainer>

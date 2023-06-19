@@ -8,32 +8,31 @@
              xmlns:tap="clr-namespace:Maui.FixesAndWorkarounds;assembly=PureWeen.Maui.FixesAndWorkarounds"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodel:ProfilePageViewModel"
-             Title="Profile">
+             Title="Profile"
+             Shell.NavBarIsVisible="False">
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior 
             EventName="Appearing"
-            Command="{Binding CheckUserLoginCommand}" 
+            Command="{Binding CheckAuthenticationCommand}" 
             CommandParameter="{StaticResource False}" />
     </ContentPage.Behaviors>
-    
-    <Shell.TitleView>
-        <HorizontalStackLayout HorizontalOptions="End">
-            <!--https://github.com/dotnet/maui/issues/9734-->
-            <Button
-                BackgroundColor="Transparent"
-                Text="Settings"
-                TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
-                Padding="0"
-                Command="{Binding EditProfileCommand}"
-                HorizontalOptions="CenterAndExpand"
-                HeightRequest="30" />
-        </HorizontalStackLayout>
-    </Shell.TitleView>
-    
+
     <local:SwipeContainer>
+        <VerticalStackLayout>
+            <HorizontalStackLayout 
+                HorizontalOptions="End"
+                Padding="10">
+                <Button
+                    BackgroundColor="Transparent"
+                    Text="Settings"
+                    TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Padding="0"
+                    Command="{Binding EditProfileCommand}"
+                    HorizontalOptions="CenterAndExpand"
+                    HeightRequest="30" />
+        </HorizontalStackLayout>
         <VerticalStackLayout 
-            Padding="10"
-            VerticalOptions="Center">
+            Padding="10">
             <Frame
                 Margin="0,0,0,35"
                 Style="{StaticResource FrameStyling}"
@@ -65,7 +64,7 @@
                         Text="{Binding User.Email}" />
                 </VerticalStackLayout>
             </Frame>
-            
+
             <Frame
                 Margin="0,0,0,35"
                 Style="{StaticResource FrameStyling}"
@@ -94,7 +93,7 @@
                     Style="{StaticResource ButtonStyling}"
                     IsVisible="{Binding IsNotBusy}"
                     IsEnabled="{Binding IsNotBusy}" />
-            
+
                 <Button
                     x:Name="btnSaveChanges"
                     Command="{Binding SaveChangesCommand}"
@@ -116,7 +115,8 @@
                     Style="{StaticResource ButtonStyling}"
                     IsVisible="{Binding HasAuth}"
                     IsEnabled="{Binding HasAuth}" />
-            </Grid>
+                </Grid>
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </local:SwipeContainer>
 </ContentPage>

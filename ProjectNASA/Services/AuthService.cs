@@ -1,26 +1,32 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using ProjectNASA.Data;
+﻿using ProjectNASA.Data;
 using System.Text.Json;
-using static SQLite.SQLite3;
 
 namespace ProjectNASA.Services
 {
     public class AuthService : IAuthService
     {
-        IUserRepository userRepository;
+        readonly IUserRepository userRepository;
 
         public AuthService(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
         }
 
-        public async Task<bool> IsAuthenticated()
+        public async Task<bool> HasAuthenticationAsync()
         {
-            var hasAuth = await SecureStorage.GetAsync("hasAuth");
-            return hasAuth != null;
+            if (AppHelpers.User is not null)
+                return true;
+
+            string hasAuth = await SecureStorage.Default.GetAsync("auth");
+            if (!string.IsNullOrEmpty(hasAuth))
+            {
+                AppHelpers.User = await userRepository.GetUserAsync(hasAuth);
+                return true;
+            }
+            return false;
         }
 
-        public async Task<bool> SignIn(string username, string password)
+        public async Task<bool> SignInAsync(string username, string password)
         {
             User user = new()
             {
@@ -31,9 +37,7 @@ namespace ProjectNASA.Services
             try
             {
                 user = await userRepository.GetUserAsync(user.Username);
-
-                string userSerialized = JsonSerializer.Serialize(user);
-                await SecureStorage.SetAsync(nameof(AppHelpers.User), userSerialized);
+                await SecureStorage.Default.SetAsync("auth", user.Username);
                 AppHelpers.User = user;
 
                 return true;
@@ -47,10 +51,11 @@ namespace ProjectNASA.Services
 
         public bool SignOut()
         {
-            return SecureStorage.Remove(nameof(AppHelpers.User));
+            AppHelpers.User = null;
+            return SecureStorage.Default.Remove("auth");
         }
 
-        public async Task<bool> SignUp(string username, string password)
+        public async Task<bool> SignUpAsync(string username, string password)
         {
             User user = new()
             {
@@ -61,9 +66,7 @@ namespace ProjectNASA.Services
             try
             {
                 bool result = await userRepository.SaveUserAsync(user);
-
-                string userSerialized = JsonSerializer.Serialize(user);
-                await SecureStorage.SetAsync(nameof(AppHelpers.User), userSerialized);
+                await SecureStorage.Default.SetAsync("auth", user.Username);
                 AppHelpers.User = user;
 
                 return result;
