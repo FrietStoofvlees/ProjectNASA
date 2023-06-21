@@ -9,12 +9,12 @@ namespace ProjectNASA.Services
     {
         readonly HttpClient httpClient;
 
+        Apod apod;
+
         public ApodService()
         {
             httpClient = new();
         }
-
-        Apod apod;
 
         public async Task<Apod> GetAstronomyPictureOfGivenDateAsync(DateTime dateTime)
         {

@@ -7,7 +7,6 @@ namespace ProjectNASA.ViewModel
     public partial class MainPageViewModel : BaseViewModel
     {
         readonly IApodService apodService;
-        readonly IAuthService authService;
         readonly IWtiaService wtiaService;
         readonly IConnectivity connectivity;
         readonly IDispatcherTimer dispatcherTimer;
@@ -19,10 +18,9 @@ namespace ProjectNASA.ViewModel
         [ObservableProperty]
         Iss iss;
 
-        public MainPageViewModel(IApodService apodService, IAuthService authService, IWtiaService wtiaService, IConnectivity connectivity, IMap map)
+        public MainPageViewModel(IApodService apodService, IWtiaService wtiaService, IConnectivity connectivity, IMap map)
         {
             this.apodService = apodService;
-            this.authService = authService;
             this.wtiaService = wtiaService;
             this.connectivity = connectivity;
             this.map = map;

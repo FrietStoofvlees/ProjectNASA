@@ -42,8 +42,12 @@ namespace ProjectNASA.Data
             {
                 Init();
                 User user = database.GetAllWithChildren<User>(user => user.Username == username).FirstOrDefault();
-
-                return user;
+                if (user == null)
+                {
+                    StatusMessage = $"User: {username} does not exsist!";
+                    throw new UserNotFoundException(StatusMessage, username);
+                }
+                    return user;
             }
             catch (Exception ex)
             {
@@ -57,8 +61,14 @@ namespace ProjectNASA.Data
             try
             {
                 Init();
+                GetUser(user.Username);
                 database.UpdateWithChildren(user);
                 StatusMessage = $"User: {user.Username} saved.";
+            }
+            catch (UserNotFoundException)
+            {
+                database.Insert(user);
+                database.UpdateWithChildren(user);
             }
             catch (Exception ex)
             {

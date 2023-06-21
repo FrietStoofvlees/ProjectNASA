@@ -1,5 +1,4 @@
 ﻿using ProjectNASA.Data;
-using System.Text.Json;
 
 namespace ProjectNASA.Services
 {
@@ -25,8 +24,16 @@ namespace ProjectNASA.Services
             string hasAuth = await SecureStorage.Default.GetAsync("auth");
             if (!string.IsNullOrEmpty(hasAuth))
             {
-                AppHelpers.User = userRepository.GetUser(hasAuth);
-                return true;
+                try
+                {
+                    AppHelpers.User = userRepository.GetUser(hasAuth);
+                    return true;
+                }
+                catch (UserNotFoundException ex)
+                {
+                    await Shell.Current.DisplayAlert("Incorrect Username", $"The username {ex.UserName} doesn't belong to an account.", "Try Again");
+                    SecureStorage.Default.Remove("auth");
+                }
             }
             return false;
         }
@@ -35,7 +42,6 @@ namespace ProjectNASA.Services
         {
             try
             {
-                //Password check
                 User user = userRepository.GetUser(username);
                 await SecureStorage.Default.SetAsync("auth", user.Username);
                 AppHelpers.User = user;
@@ -63,7 +69,8 @@ namespace ProjectNASA.Services
             User user = new()
             {
                 Username = username,
-                Password = password
+                Password = password,
+                FavoriteApods = new()
             };
 
             try
